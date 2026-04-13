@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grandanés studio — Mobiliario y objetos para mascotas</title>
+    <meta name="description" content="Grandanés Studio. Diseño de mobiliario y objetos para mascotas. Córdoba, Argentina.">
+    <style>
+        :root {
+            --grafito: #1e1e1e;
+            --brown: #5f5043;
+            --white: #fafafa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--grafito);
+            color: var(--white);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════
+           NAV
+        ═══════════════════════════════════════ */
+        nav {
+            background: var(--grafito);
+            padding: 28px 40px;
+        }
+
+        .nav-logo-placeholder {
+            /* PLACEHOLDER: Reemplazar con:
+               <img src="images/logo-grandanes-studio.svg" alt="grandanés studio" class="nav-logo">
+               y eliminar este div */
+            display: inline-flex;
+            align-items: center;
+            height: 38px;
+            padding: 4px 12px;
+            border: 1px dashed rgba(250,250,250,0.25);
+            font-weight: 300;
+            font-size: 1.3rem;
+            line-height: 1.15;
+            color: var(--white);
+            letter-spacing: -0.01em;
+            opacity: 0.4;
+        }
+
+        .nav-logo {
+            height: 38px;
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════
+           HERO
+        ═══════════════════════════════════════ */
+        .hero {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 8;
+            min-height: 500px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            /* PLACEHOLDER: reemplazar con tu imagen hero:
+               background: url('images/hero.jpg') center/cover no-repeat; */
+            background:
+                linear-gradient(180deg,
+                    rgba(40,32,26,0.35) 0%,
+                    rgba(40,32,26,0.2) 40%,
+                    rgba(40,32,26,0.55) 100%),
+                linear-gradient(135deg, #5c4d40 0%, #7a6b5e 35%, #4a3d33 65%, #6b5c4f 100%);
+        }
+
+        /* ─── Headline centered block ─── */
+        .hero-center {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 40px;
+        }
+
+        .hero-headline {
+            width: 52%;
+            max-width: 660px;
+            min-width: 280px;
+        }
+
+        .hero-headline .line {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 300;
+            font-size: clamp(1.6rem, 4.8vw, 4rem);
+            line-height: 1.2;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 0.01em;
+        }
+
+        /* ─── Bottom bar: full page width ─── */
+        .hero-bottom {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 40px 35px;
+        }
+
+        .hero-location,
+        .hero-tagline {
+            font-size: 0.62rem;
+            font-weight: 300;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba(250, 250, 250, 0.7);
+            line-height: 1.55;
+        }
+
+        .hero-tagline {
+            text-align: right;
+        }
+
+        /* ═══════════════════════════════════════
+           CONCEPTO
+        ═══════════════════════════════════════ */
+        .concepto {
+            background: var(--brown);
+            padding: 80px 40px 90px;
+        }
+
+        .concepto-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .concepto-label {
+            font-size: 0.62rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(250, 250, 250, 0.5);
+            margin-bottom: 18px;
+        }
+
+        .concepto-title {
+            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+            line-height: 1.4;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        .concepto-right p {
+            font-weight: 300;
+            font-size: 0.76rem;
+            line-height: 1.75;
+            color: rgba(250, 250, 250, 0.8);
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        /* ═══════════════════════════════════════
+           PROXIMAMENTE
+        ═══════════════════════════════════════ */
+        .proximamente {
+            background: var(--white);
+            color: var(--grafito);
+            padding: 80px 40px 100px;
+        }
+
+        .proximamente-title {
+            text-align: center;
+            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.3rem, 2.8vw, 2rem);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--grafito);
+            margin-bottom: 50px;
+        }
+
+        .proximamente-grid {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .product-card {
+            width: 280px;
+            aspect-ratio: 4 / 5;
+            position: relative;
+            overflow: hidden;
+            /* PLACEHOLDER: reemplazar con imágenes de producto */
+            background: linear-gradient(135deg, #c8c4bf 0%, #b5b0a9 50%, #d1cdc8 100%);
+        }
+
+        .product-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(200, 196, 191, 0.25);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .product-card.c1 { background: linear-gradient(160deg, #c0b9b0 0%, #a89f95 100%); }
+        .product-card.c2 { background: linear-gradient(160deg, #c8c2b8 0%, #b5ad9f 100%); }
+        .product-card.c3 { background: linear-gradient(160deg, #a8a29a 0%, #908880 100%); }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════ */
+        footer {
+            background: var(--grafito);
+            padding: 60px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .footer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .footer-info span,
+        .footer-info a {
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba(250, 250, 250, 0.6);
+            line-height: 1.6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-info a:hover {
+            color: var(--white);
+        }
+
+        .footer-logo-placeholder {
+            /* PLACEHOLDER: Reemplazar con:
+               <img src="images/gd-iso.svg" alt="gd." class="footer-logo">
+               y eliminar este div */
+            width: 100px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(250,250,250,0.25);
+            font-weight: 700;
+            font-size: 3.8rem;
+            line-height: 0.85;
+            color: var(--white);
+            letter-spacing: -0.04em;
+            opacity: 0.4;
+        }
+
+        .footer-logo {
+            height: 75px;
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════
+           ANIMATIONS
+        ═══════════════════════════════════════ */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .d1 { transition-delay: 0.1s; }
+        .d2 { transition-delay: 0.2s; }
+        .d3 { transition-delay: 0.3s; }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════ */
+        @media (max-width: 960px) {
+            .hero-headline {
+                width: 70%;
+            }
+
+            .concepto-inner {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .proximamente-grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 22px;
+            }
+
+            .product-card {
+                width: 260px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav { padding: 22px 24px; }
+
+            .hero {
+                aspect-ratio: auto;
+                min-height: 400px;
+            }
+
+            .hero-center { padding: 0 24px; }
+
+            .hero-headline {
+                width: 90%;
+                min-width: 0;
+            }
+
+            .hero-headline .line {
+                font-size: 1.5rem;
+            }
+
+            .hero-bottom {
+                padding: 0 24px 22px;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .hero-tagline { text-align: left; }
+
+            .concepto { padding: 45px 24px 55px; }
+            .concepto-title { font-size: 1.15rem; }
+
+            .proximamente { padding: 50px 24px 70px; }
+
+            .product-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            footer {
+                padding: 40px 24px;
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                gap: 35px;
+            }
+
+            .footer-logo-placeholder,
+            .footer-logo {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <!-- PLACEHOLDER: Reemplazar con <img src="images/logo-grandanes-studio.svg" alt="grandanés studio" class="nav-logo"> -->
+        <div class="nav-logo-placeholder">grandanés studio.</div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg">
+            <!-- PLACEHOLDER: Cambiar el CSS de .hero-bg a:
+                 background: url('images/hero.jpg') center/cover no-repeat; -->
+        </div>
+
+        <div class="hero-center">
+            <h1 class="hero-headline">
+                <div class="line fade-up">
+                    <span>Está</span><span>llegando</span><span>el</span><span>mueble</span>
+                </div>
+                <div class="line fade-up d1">
+                    <span>para</span><span>quien</span><span>manda</span>
+                </div>
+                <div class="line fade-up d2">
+                    <span>en</span><span>la</span><span>casa.</span>
+                </div>
+            </h1>
+        </div>
+
+        <div class="hero-bottom">
+            <div class="hero-location fade-up d3">
+                Córdoba<br>CBA, Argentina.
+            </div>
+            <div class="hero-tagline fade-up d3">
+                /Diseño de mobiliario y<br>objetos para mascotas.
+            </div>
+        </div>
+    </section>
+
+    <!-- CONCEPTO -->
+    <section class="concepto">
+        <div class="concepto-inner">
+            <div>
+                <div class="concepto-label fade-up">/Concepto</div>
+                <h2 class="concepto-title fade-up d1">
+                    Mejoramos la habitabilidad<br>
+                    de las mascotas a través del diseño.
+                </h2>
+            </div>
+            <div class="concepto-right fade-up d2">
+                <p>Grandanés nace de la búsqueda por habitar los espacios del hogar junto a nuestras mascotas de una forma orgánica, estética y funcional.</p>
+                <p>Desde una mirada proyectual y arquitectónica, desarrollamos mobiliario y objetos que se integran visual y funcionalmente al entorno doméstico.</p>
+                <p>Cada pieza busca convivir con el espacio, no imponerse, sino acompañar, desde la calidez de los materiales y la simpleza de la forma.</p>
+                <p>Grandanés explora la relación entre diseño, arquitectura y la habitabilidad de los espacios en la vida doméstica. Cada pieza propone una forma de habitar con equilibrio y coherencia, integrando a las mascotas dentro del lenguaje del hogar.</p>
+                <p>Nos define la simpleza, los materiales nobles y una estética que combina la funcionalidad y la armonía.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROXIMAMENTE -->
+    <section class="proximamente">
+        <div class="proximamente-title fade-up">Proximamente</div>
+        <div class="proximamente-grid">
+            <div class="product-card c1 fade-up d1">
+                <!-- PLACEHOLDER: <img src="images/product-1.jpg" alt="Producto 1" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:2;"> -->
+            </div>
+            <div class="product-card c2 fade-up d2">
+                <!-- PLACEHOLDER: <img src="images/product-2.jpg" alt="Producto 2" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:2;"> -->
+            </div>
+            <div class="product-card c3 fade-up d3">
+                <!-- PLACEHOLDER: <img src="images/product-3.jpg" alt="Producto 3" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:2;"> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-info">
+            <span>Córdoba</span>
+            <span>CBA, Argentina.</span>
+            <a href="mailto:studiograndanes@gmail.com">studiograndanes@gmail.com</a>
+            <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">@grandanes.studio</a>
+        </div>
+        <!-- PLACEHOLDER: Reemplazar con <img src="images/gd-iso.svg" alt="gd." class="footer-logo"> -->
+        <div class="footer-logo-placeholder">gd.</div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
