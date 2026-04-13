@@ -40,23 +40,6 @@
             padding: 28px 40px;
         }
 
-        .nav-logo-placeholder {
-            /* PLACEHOLDER: Reemplazar con:
-               <img src="images/logo-grandanes-studio.svg" alt="grandanés studio" class="nav-logo">
-               y eliminar este div */
-            display: inline-flex;
-            align-items: center;
-            height: 38px;
-            padding: 4px 12px;
-            border: 1px dashed rgba(250,250,250,0.25);
-            font-weight: 300;
-            font-size: 1.3rem;
-            line-height: 1.15;
-            color: var(--white);
-            letter-spacing: -0.01em;
-            opacity: 0.4;
-        }
-
         .nav-logo {
             height: 38px;
             display: block;
@@ -76,13 +59,12 @@
         }
 
         .hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: url('https://github.com/studiograndanes-cpu/grandanes-web/blob/main/hero.jpg.jpg?raw=true') center/cover no-repeat;
-}
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: url('hero.jpg.jpg') center/cover no-repeat;
+        }
 
-        /* ─── Headline centered block ─── */
         .hero-center {
             position: relative;
             z-index: 2;
@@ -94,25 +76,23 @@
         }
 
         .hero-headline {
-            width: 52%;
-            max-width: 660px;
-            min-width: 280px;
+            width: 520px;
+            max-width: 90vw;
         }
 
         .hero-headline .line {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
+            display: block;
+            text-align: justify;
+            text-align-last: justify;
             font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
             font-weight: 300;
-            font-size: clamp(1.6rem, 4.8vw, 4rem);
+            font-size: clamp(1.6rem, 4.5vw, 3.5rem);
             line-height: 1.2;
             text-transform: uppercase;
             color: var(--white);
             letter-spacing: 0.01em;
         }
 
-        /* ─── Bottom bar: full page width ─── */
         .hero-bottom {
             position: relative;
             z-index: 2;
@@ -212,8 +192,16 @@
             aspect-ratio: 4 / 5;
             position: relative;
             overflow: hidden;
-            /* PLACEHOLDER: reemplazar con imágenes de producto */
             background: linear-gradient(135deg, #c8c4bf 0%, #b5b0a9 50%, #d1cdc8 100%);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 2;
         }
 
         .product-card::after {
@@ -262,24 +250,6 @@
             color: var(--white);
         }
 
-        .footer-logo-placeholder {
-            /* PLACEHOLDER: Reemplazar con:
-               <img src="images/gd-iso.svg" alt="gd." class="footer-logo">
-               y eliminar este div */
-            width: 100px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px dashed rgba(250,250,250,0.25);
-            font-weight: 700;
-            font-size: 3.8rem;
-            line-height: 0.85;
-            color: var(--white);
-            letter-spacing: -0.04em;
-            opacity: 0.4;
-        }
-
         .footer-logo {
             height: 75px;
             display: block;
@@ -307,10 +277,6 @@
            RESPONSIVE
         ═══════════════════════════════════════ */
         @media (max-width: 960px) {
-            .hero-headline {
-                width: 70%;
-            }
-
             .concepto-inner {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -338,8 +304,7 @@
             .hero-center { padding: 0 24px; }
 
             .hero-headline {
-                width: 90%;
-                min-width: 0;
+                width: 90vw;
             }
 
             .hero-headline .line {
@@ -371,7 +336,6 @@
                 gap: 35px;
             }
 
-            .footer-logo-placeholder,
             .footer-logo {
                 align-self: flex-end;
             }
@@ -381,28 +345,19 @@
 <body>
 
     <!-- NAV -->
-<nav>
-    <img src="GrandanesStudio.png" alt="grandanés studio" class="nav-logo">
-</nav>
+    <nav>
+        <img src="GrandanesStudio.png" alt="grandanés studio" class="nav-logo">
+    </nav>
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-bg">
-            <!-- PLACEHOLDER: Cambiar el CSS de .hero-bg a:
-                 background: url('images/hero.jpg') center/cover no-repeat; -->
-        </div>
+        <div class="hero-bg"></div>
 
         <div class="hero-center">
             <h1 class="hero-headline">
-                <div class="line fade-up">
-                    <span>Está</span><span>llegando</span><span>el</span><span>mueble</span>
-                </div>
-                <div class="line fade-up d1">
-                    <span>para</span><span>quien</span><span>manda</span>
-                </div>
-                <div class="line fade-up d2">
-                    <span>en</span><span>la</span><span>casa.</span>
-                </div>
+                <div class="line fade-up">Está llegando el mueble</div>
+                <div class="line fade-up d1">para quien manda</div>
+                <div class="line fade-up d2">en la casa.</div>
             </h1>
         </div>
 
@@ -437,20 +392,20 @@
     </section>
 
     <!-- PROXIMAMENTE -->
-<section class="proximamente">
-    <div class="proximamente-title fade-up">Proximamente</div>
-    <div class="proximamente-grid">
-        <div class="product-card c1 fade-up d1">
-            <img src="Proximamente02.jpg" alt="Producto 1" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:2;">
+    <section class="proximamente">
+        <div class="proximamente-title fade-up">Proximamente</div>
+        <div class="proximamente-grid">
+            <div class="product-card c1 fade-up d1">
+                <img src="Proximamente02.jpg" alt="Producto 1">
+            </div>
+            <div class="product-card c2 fade-up d2">
+                <img src="Proximamente01.jpg" alt="Producto 2">
+            </div>
+            <div class="product-card c3 fade-up d3">
+                <img src="Proximamente03.jpg" alt="Producto 3">
+            </div>
         </div>
-        <div class="product-card c2 fade-up d2">
-            <img src="Proximamente01.jpg" alt="Producto 2" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:2;">
-        </div>
-        <div class="product-card c3 fade-up d3">
-            <img src="Proximamente03.jpg" alt="Producto 3" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:2;">
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- FOOTER -->
     <footer>
@@ -460,7 +415,6 @@
             <a href="mailto:studiograndanes@gmail.com">studiograndanes@gmail.com</a>
             <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">@grandanes.studio</a>
         </div>
-        <!-- PLACEHOLDER: Reemplazar con <img src="images/gd-iso.svg" alt="gd." class="footer-logo"> -->
         <img src="gd.png" alt="gd." class="footer-logo">
     </footer>
 
