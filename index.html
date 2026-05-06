@@ -3,38 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>grandanés studio — Mobiliario y objetos para mascotas</title>
-    <meta name="description" content="Grandanés Studio. Diseño de mobiliario y objetos para mascotas. Córdoba, Argentina.">
+    <title>grandanés — Diseño para mascotas</title>
+    <meta name="description" content="Un estudio de diseño para mascotas. Mobiliario y objetos. Córdoba, Argentina.">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/Favicon.png">
 
     <!-- OG Meta Tags -->
-    <meta property="og:title" content="grandanés studio — Mobiliario y objetos para mascotas">
-    <meta property="og:description" content="Diseño de mobiliario y objetos para mascotas. Córdoba, Argentina.">
-    <meta property="og:image" content="images/hero.jpg">
+    <meta property="og:title" content="grandanés — Diseño para mascotas">
+    <meta property="og:description" content="Un estudio de diseño para mascotas. Próximamente en TiendaNube.">
+    <meta property="og:image" content="images/Hero-Web-NEW.jpg">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_AR">
     <meta name="twitter:card" content="summary_large_image">
 
     <style>
         /* ═══════════════════════════════════════
-           VARIABLES & RESET
+           FONTS — Halyard Display + Helvetica Now
+           (con fallback a Helvetica del sistema)
         ═══════════════════════════════════════ */
-        :root {
-            --grafito: #1e1e1e;
-            --ford-white: #fafafa;
-            --clouded-vision: #d1d0d1;
-            --feather-gray: #b4ada0;
-            --sea-spray: #93a1a4;
-            --brown: #5f5043;
+        @font-face {
+            font-family: 'Halyard Display';
+            font-weight: 500;
+            font-style: normal;
+            src: local('Halyard Display Medium'), local('HalyardDisplay-Medium');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Helvetica Now Display';
+            font-weight: 400;
+            font-style: normal;
+            src: local('Helvetica Now Display'), local('HelveticaNowDisplay-Regular');
+            font-display: swap;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --grafito: #1e1e1e;
+            --azul: #2c77da;
+            --cuero: #5b3a24;
+            --white: #ffffff;
+            --text-body: #1e1e1e;
+
+            --font-display: 'Halyard Display', 'Halyard Display Medium', Helvetica, 'Helvetica Neue', Arial, sans-serif;
+            --font-body: 'Helvetica Now Display', 'Helvetica Now', Helvetica, 'Helvetica Neue', Arial, sans-serif;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             font-size: 16px;
@@ -43,11 +57,15 @@
         }
 
         body {
-            background: var(--grafito);
-            color: var(--ford-white);
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--white);
+            color: var(--text-body);
+            font-family: var(--font-body);
             overflow-x: hidden;
+            line-height: 1.4;
         }
+
+        ::selection { background: var(--azul); color: var(--white); }
+        a { color: inherit; text-decoration: none; }
 
         /* ═══════════════════════════════════════
            PRELOADER
@@ -62,86 +80,55 @@
             justify-content: center;
             transition: opacity 0.6s ease, visibility 0.6s ease;
         }
-
-        .preloader.loaded {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .preloader-logo {
-            height: 60px;
-            opacity: 0;
-            animation: preloaderPulse 1.4s ease infinite, preloaderFadeIn 0.5s ease 0.1s forwards;
-        }
-
-        @keyframes preloaderFadeIn {
-            to { opacity: 0.9; }
-        }
-
+        .preloader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
+        .preloader-logo { width: 240px; height: auto; opacity: 0; animation: preloaderPulse 1.4s ease infinite, preloaderFadeIn 0.5s ease 0.1s forwards; }
+        .preloader-logo img { width: 100%; height: auto; display: block; }
+        @keyframes preloaderFadeIn { to { opacity: 1; } }
         @keyframes preloaderPulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
+            50% { transform: scale(1.06); }
         }
 
         /* ═══════════════════════════════════════
-           SMOOTH SCROLL WRAPPER
+           TOP BAR (azul fina con GD.)
         ═══════════════════════════════════════ */
-        .smooth-content {
-            will-change: transform;
-        }
-
-        /* ═══════════════════════════════════════
-           NAV
-        ═══════════════════════════════════════ */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: transparent;
-            padding: 28px 40px;
-            transition: background 0.4s ease, padding 0.4s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(30, 30, 30, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 18px 40px;
-        }
-
-        .nav-inner {
+        .topbar {
+            background: var(--azul);
+            padding: 12px 28px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar-logo {
+            display: flex;
             align-items: center;
         }
 
-        .nav-logo {
-            height: 32px;
-            display: block;
-            opacity: 0.9;
+        .topbar-logo svg {
+            height: 22px;
+            width: auto;
+            fill: var(--white);
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .topbar-link {
+            color: var(--white);
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            opacity: 0.85;
             transition: opacity 0.3s ease;
         }
-
-        .nav-logo:hover {
-            opacity: 1;
-        }
-
-        .nav-link {
-            font-size: 0.65rem;
-            font-weight: 300;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.6);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--ford-white);
-        }
+        .topbar-link:hover { opacity: 1; }
 
         /* ═══════════════════════════════════════
            HERO
@@ -149,833 +136,602 @@
         .hero {
             position: relative;
             width: 100%;
-            height: 100vh;
-            min-height: 600px;
+            height: calc(100vh - 46px);
+            height: calc(100dvh - 46px);
+            min-height: 480px;
+            background: var(--grafito);
+            color: var(--white);
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
-        .hero-bg {
-            position: absolute;
-            inset: -40px;
-            z-index: 1;
-            background: url('images/hero.jpg') center/cover no-repeat;
-            will-change: transform;
-            transition: transform 0.1s linear;
-        }
-
-        .hero-overlay {
+        .hero-img {
             position: absolute;
             inset: 0;
-            z-index: 2;
-            background: linear-gradient(
-                to bottom,
-                rgba(30, 30, 30, 0.3) 0%,
-                rgba(30, 30, 30, 0.1) 40%,
-                rgba(30, 30, 30, 0.4) 100%
-            );
-        }
-
-        .hero-center {
-            position: relative;
-            z-index: 3;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 40px;
-        }
-
-        .hero-headline {
-            width: 520px;
-            max-width: 90vw;
-        }
-
-        .hero-headline .line {
-            display: block;
-            text-align: justify;
-            text-align-last: justify;
-            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-            font-weight: 300;
-            font-size: clamp(1.6rem, 4.5vw, 3.5rem);
-            line-height: 1.2;
-            text-transform: uppercase;
-            color: var(--ford-white);
-            letter-spacing: 0.01em;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: heroLineIn 0.9s ease forwards;
-            animation-play-state: paused;
-        }
-
-        .hero-headline .line:nth-child(1) { animation-delay: 0.3s; }
-        .hero-headline .line:nth-child(2) { animation-delay: 0.5s; }
-        .hero-headline .line:nth-child(3) { animation-delay: 0.7s; }
-
-        body.ready .hero-headline .line {
-            animation-play-state: running;
-        }
-
-        @keyframes heroLineIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-bottom {
-            position: relative;
-            z-index: 3;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding: 0 40px 35px;
-        }
-
-        .hero-location {
-            font-size: 0.62rem;
-            font-weight: 300;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.7);
-            line-height: 1.55;
-            text-align: left;
-        }
-
-        .hero-tagline {
-            font-size: 0.62rem;
-            font-weight: 300;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.7);
-            line-height: 1.55;
-            text-align: right;
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 35px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            animation: fadeInDelay 1s ease 1.2s forwards;
-            animation-play-state: paused;
-        }
-
-        body.ready .scroll-indicator {
-            animation-play-state: running;
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 32px;
-            background: rgba(250, 250, 250, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .scroll-line::after {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(250, 250, 250, 0.8);
-            animation: scrollPulse 1.8s ease infinite;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
         }
 
-        @keyframes scrollPulse {
-            0% { top: -100%; }
-            100% { top: 100%; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(30, 30, 30, 0.4);
+            z-index: 2;
+            pointer-events: none;
         }
 
-        @keyframes fadeInDelay {
-            to { opacity: 1; }
+        .hero-text {
+            position: absolute;
+            top: calc(50% - 5.5vw);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.8rem, 3.4vw, 3.4rem);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            color: var(--white);
+            text-align: left;
+            z-index: 3;
+            white-space: nowrap;
+        }
+
+        .hero-text .highlight {
+            display: inline-block;
+            background: var(--azul);
+            color: var(--white);
+            padding: 0 4px;
+            border-radius: 0;
+            margin: 0;
+            line-height: 1;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        /* GRANDANÉS gigante encima de la imagen, en la base del hero */
+        .hero-wordmark {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+            padding: 0 2vw;
+            line-height: 0;
+            pointer-events: none;
+        }
+
+        .hero-wordmark svg {
+            width: 100%;
+            height: auto;
+            fill: var(--white);
+            display: block;
         }
 
         /* ═══════════════════════════════════════
-           CONCEPTO
+           MANIFIESTO — DISEÑAMOS PARA ELLOS
         ═══════════════════════════════════════ */
-        .concepto {
-            background: var(--brown);
-            padding: 100px 40px 110px;
+        .manifiesto {
+            background: var(--white);
+            padding: 100px 6% 110px;
+            position: relative;
         }
 
-        .concepto-inner {
-            max-width: 1100px;
+        .manifiesto-inner {
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
             align-items: start;
         }
 
-        .concepto-label {
-            font-size: 0.62rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.5);
-            margin-bottom: 18px;
-        }
-
-        .concepto-title {
-            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+        .manifiesto-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
             font-weight: 400;
-            font-size: clamp(1.3rem, 2.5vw, 1.85rem);
-            line-height: 1.4;
-            letter-spacing: 0.01em;
-            text-transform: uppercase;
-            color: var(--ford-white);
+            color: var(--grafito);
+            margin-bottom: 28px;
+            opacity: 0.8;
         }
 
-        .concepto-right p {
-            font-weight: 300;
-            font-size: 0.76rem;
-            line-height: 1.75;
-            color: rgba(250, 250, 250, 0.8);
-            margin-bottom: 10px;
-            text-align: justify;
+        .manifiesto-headline {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(2.5rem, 6.2vw, 5.8rem);
+            line-height: 0.95;
+            letter-spacing: -0.025em;
+            color: var(--grafito);
+            margin-bottom: 38px;
         }
 
-        /* ═══════════════════════════════════════
-           MATERIALES / PROCESO
-        ═══════════════════════════════════════ */
-        .materiales {
-            background: var(--grafito);
-            padding: 90px 0;
+        .manifiesto-text p {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.55;
+            color: var(--grafito);
+            max-width: 460px;
+            margin-bottom: 14px;
+        }
+
+        .manifiesto-sticker {
+            margin-top: 50px;
+            max-width: 380px;
+            transform: rotate(-3deg);
+        }
+
+        .manifiesto-sticker svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+        }
+
+        .manifiesto-photo {
+            aspect-ratio: 4 / 5;
             overflow: hidden;
-        }
-
-        .materiales-label {
-            font-size: 0.62rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.4);
-            text-align: center;
-            margin-bottom: 50px;
-            padding: 0 40px;
-        }
-
-        .materiales-track {
-            display: flex;
-            gap: 3px;
-            animation: marquee 30s linear infinite;
-            width: max-content;
-        }
-
-        .materiales-track:hover {
-            animation-play-state: paused;
-        }
-
-        .material-item {
-            flex-shrink: 0;
-            width: 320px;
-            height: 220px;
             position: relative;
-            overflow: hidden;
         }
 
-        .material-item img {
+        .manifiesto-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
 
-        .material-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 2;
-            font-size: 0.6rem;
-            font-weight: 300;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.85);
-            text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-            padding: 12px 16px;
-            background: linear-gradient(to top, rgba(30,30,30,0.5) 0%, transparent 100%);
+        /* ═══════════════════════════════════════
+           BROWN TICKER — STUDIOGRANDANES.COM
+        ═══════════════════════════════════════ */
+        .ticker {
+            background: var(--cuero);
+            padding: 22px 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        @keyframes marquee {
+        .ticker-track {
+            display: flex;
+            gap: 60px;
+            animation: tickerScroll 35s linear infinite;
+            width: max-content;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 2.4rem;
+            letter-spacing: 0.01em;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        @keyframes tickerScroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
         /* ═══════════════════════════════════════
-           LINEAS DE PRODUCTO
+           PRODUCTOS — LO QUE SE VIENE
         ═══════════════════════════════════════ */
-        .lineas {
-            background: var(--grafito);
-            padding: 100px 40px 110px;
+        .productos {
+            background: var(--white);
+            padding: 110px 6% 100px;
         }
 
-        .lineas-label {
-            font-size: 0.62rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.4);
-            text-align: center;
-            margin-bottom: 55px;
+        .productos-header {
+            max-width: 1300px;
+            margin: 0 auto 60px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+            align-items: end;
         }
 
-        .lineas-grid {
-            max-width: 1100px;
+        .productos-title {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(2.2rem, 5vw, 4.5rem);
+            line-height: 0.95;
+            letter-spacing: -0.025em;
+            color: var(--grafito);
+        }
+
+        .productos-sub {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--grafito);
+            max-width: 360px;
+            text-align: right;
+            justify-self: end;
+        }
+
+        .productos-grid {
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: rgba(250, 250, 250, 0.08);
+            gap: 22px;
         }
 
-        .linea-item {
-            background: var(--grafito);
-            padding: 50px 40px;
-            text-align: center;
-            transition: background 0.5s ease;
-        }
-
-        .linea-item:hover {
-            background: rgba(250, 250, 250, 0.03);
-        }
-
-        .linea-name {
-            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-            font-weight: 400;
-            font-size: clamp(1.4rem, 2.5vw, 2rem);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: var(--ford-white);
-            margin-bottom: 0;
-        }
-
-        /* ═══════════════════════════════════════
-           PROXIMAMENTE
-        ═══════════════════════════════════════ */
-        .proximamente {
-            background: var(--ford-white);
-            color: var(--grafito);
-            padding: 100px 40px 110px;
-        }
-
-        .proximamente-title {
-            text-align: center;
-            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-            font-weight: 400;
-            font-size: clamp(1.3rem, 2.8vw, 2rem);
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--grafito);
-            margin-bottom: 55px;
-        }
-
-        .proximamente-grid {
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .product-card {
-            flex: 1;
-            max-width: 340px;
-            aspect-ratio: 4 / 5;
-            position: relative;
-            overflow: hidden;
+        .producto-card {
             cursor: pointer;
         }
 
-        .product-card img {
+        .producto-img-wrap {
+            aspect-ratio: 1 / 1;
+            background: var(--grafito);
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .producto-img-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: blur(8px) brightness(0.55);
+            transform: scale(1.08);
+            transition: filter 0.6s ease, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
         }
 
-        .product-card:hover img {
-            transform: scale(1.04);
+        .producto-card:hover .producto-img-wrap img {
+            filter: blur(0) brightness(1);
+            transform: scale(1.02);
         }
 
-        .product-card-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            background: rgba(30, 30, 30, 0);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 30px;
-            transition: background 0.5s ease;
-            pointer-events: none;
-        }
-
-        .product-card:hover .product-card-overlay {
-            background: rgba(30, 30, 30, 0.55);
-            pointer-events: auto;
-        }
-
-        .product-card-name {
-            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-            font-weight: 400;
-            font-size: 1.1rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--ford-white);
-            opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
-        }
-
-        .product-card:hover .product-card-name {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ═══════════════════════════════════════
-           CTA CONTACTO
-        ═══════════════════════════════════════ */
-        .cta {
-            background: var(--sea-spray);
-            padding: 90px 40px;
-            text-align: center;
-        }
-
-        .cta-title {
-            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-            font-weight: 300;
-            font-size: clamp(1.2rem, 2.8vw, 2rem);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--ford-white);
-            margin-bottom: 12px;
-        }
-
-        .cta-sub {
-            font-weight: 300;
-            font-size: 0.72rem;
-            line-height: 1.7;
-            color: rgba(250, 250, 250, 0.7);
-            margin-bottom: 36px;
-            letter-spacing: 0.03em;
-        }
-
-        .cta-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            font-size: 0.65rem;
-            font-weight: 400;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--ford-white);
-            text-decoration: none;
-            padding: 13px 32px;
-            border: 1px solid rgba(250, 250, 250, 0.4);
-            transition: all 0.4s ease;
-        }
-
-        .cta-btn:hover {
-            background: var(--ford-white);
-            color: var(--sea-spray);
-            border-color: var(--ford-white);
-        }
-
-        .cta-separator {
-            width: 28px;
-            height: 1px;
-            background: rgba(250, 250, 250, 0.3);
-        }
-
-        /* ═══════════════════════════════════════
-           INSTAGRAM FEED
-        ═══════════════════════════════════════ */
-        .ig-feed {
-            background: var(--ford-white);
-            padding: 80px 40px 90px;
-        }
-
-        .ig-feed-header {
-            text-align: center;
-            margin-bottom: 45px;
-        }
-
-        .ig-feed-label {
-            font-size: 0.62rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(30, 30, 30, 0.4);
-            margin-bottom: 10px;
-        }
-
-        .ig-feed-handle {
-            font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
-            font-weight: 400;
-            font-size: 1.1rem;
-            letter-spacing: 0.06em;
-            color: var(--grafito);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .ig-feed-handle:hover {
-            color: var(--sea-spray);
-        }
-
-        .ig-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .ig-item {
-            aspect-ratio: 1;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .ig-item-inner {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .ig-item:hover .ig-item-inner {
-            transform: scale(1.06);
-        }
-
-        .ig-item::after {
+        .producto-img-wrap::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(30, 30, 30, 0);
-            transition: background 0.4s ease;
+            background: rgba(30, 30, 30, 0.25);
             pointer-events: none;
+            transition: background 0.5s ease;
         }
 
-        .ig-item:hover::after {
-            background: rgba(30, 30, 30, 0.15);
+        .producto-card:hover .producto-img-wrap::after {
+            background: rgba(30, 30, 30, 0);
         }
 
-        /* Colores de placeholder basados en la paleta del feed */
-        .ig-ph-1 { background: linear-gradient(135deg, #3a3632 0%, #4a4540 100%); }
-        .ig-ph-2 { background: linear-gradient(135deg, #c8bfb0 0%, #b5aa98 100%); }
-        .ig-ph-3 { background: linear-gradient(135deg, #8a7e72 0%, #6e635a 100%); }
-        .ig-ph-4 { background: linear-gradient(135deg, #93a1a4 0%, #7d8b8e 100%); }
-        .ig-ph-5 { background: linear-gradient(135deg, #d1cdc8 0%, #bfb9b2 100%); }
-        .ig-ph-6 { background: linear-gradient(135deg, #5f5043 0%, #4a3d32 100%); }
-
-        .ig-follow {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .ig-follow a {
-            font-size: 0.65rem;
-            font-weight: 400;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
+        .producto-name {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.6rem;
+            letter-spacing: -0.01em;
             color: var(--grafito);
-            text-decoration: none;
-            padding: 13px 32px;
-            border: 1px solid rgba(30, 30, 30, 0.2);
-            transition: all 0.4s ease;
-            display: inline-block;
         }
 
-        .ig-follow a:hover {
-            background: var(--grafito);
-            color: var(--ford-white);
-            border-color: var(--grafito);
+        /* ═══════════════════════════════════════
+           CTA — NEWSLETTER AZUL
+        ═══════════════════════════════════════ */
+        .cta {
+            background: var(--azul);
+            color: var(--white);
+            padding: 100px 6% 110px;
+            text-align: center;
         }
+
+        .cta-inner {
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .cta-eyebrow {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            opacity: 1;
+            letter-spacing: -0.005em;
+        }
+
+        .cta-headline {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2rem, 4.8vw, 4.4rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 22px;
+        }
+
+        .cta-headline span {
+            display: block;
+            white-space: nowrap;
+        }
+
+        .cta-text {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.5;
+            opacity: 0.95;
+            max-width: 460px;
+            margin: 0 auto 36px;
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 0;
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 99px;
+            padding: 6px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-form:focus-within {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .cta-form input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--grafito);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            padding: 12px 22px;
+        }
+
+        .cta-form input::placeholder {
+            color: rgba(30,30,30,0.5);
+        }
+
+        .cta-form button {
+            background: var(--grafito);
+            color: var(--white);
+            border: none;
+            border-radius: 99px;
+            padding: 12px 28px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .cta-form button:hover { background: #000; }
+
+        .cta-msg {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            opacity: 0.85;
+            min-height: 18px;
+        }
+
+        /* ═══════════════════════════════════════
+           IG FEED
+        ═══════════════════════════════════════ */
+        .ig-feed {
+            background: var(--white);
+            padding: 110px 6% 90px;
+        }
+
+        .ig-header {
+            max-width: 1300px;
+            margin: 0 auto 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 30px;
+        }
+
+        .ig-title {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(2rem, 4.2vw, 3.5rem);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            color: var(--grafito);
+        }
+
+        .ig-title .at {
+            color: var(--grafito);
+        }
+
+        .ig-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--grafito);
+            color: var(--white);
+            border-radius: 99px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .ig-cta:hover { background: var(--azul); }
+
+        .ig-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .ig-item {
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .ig-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+
+        .ig-item:hover img { transform: scale(1.04); }
 
         /* ═══════════════════════════════════════
            FOOTER
         ═══════════════════════════════════════ */
         footer {
             background: var(--grafito);
-            padding: 60px 40px 30px;
+            color: var(--white);
+            padding: 80px 6% 0;
+            overflow: hidden;
         }
 
         .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        .footer-left {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr 1.3fr 1fr;
+            gap: 60px;
+            padding-bottom: 70px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .footer-contact {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .footer-contact a {
-            font-size: 0.78rem;
-            font-weight: 300;
-            letter-spacing: 0.04em;
-            color: var(--ford-white);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-            opacity: 0.85;
-        }
-
-        .footer-contact a:hover {
-            opacity: 1;
-        }
-
-        .footer-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .footer-meta span {
-            font-size: 0.62rem;
-            font-weight: 300;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.4);
-            line-height: 1.6;
-        }
-
-        .footer-logo {
-            height: 70px;
+        .footer-brand-logo {
+            height: 26px;
+            width: auto;
+            fill: var(--white);
             display: block;
-            opacity: 0.8;
+            margin-bottom: 22px;
+        }
+
+        .footer-tagline {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            line-height: 1.55;
+            color: rgba(255,255,255,0.6);
+            max-width: 320px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        .footer-col a, .footer-col span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            color: var(--white);
+            margin-bottom: 8px;
+            opacity: 0.9;
             transition: opacity 0.3s ease;
         }
 
-        .footer-logo:hover {
-            opacity: 1;
-        }
+        .footer-col a:hover { opacity: 0.6; }
 
         .footer-bottom {
-            margin-top: 45px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(250, 250, 250, 0.06);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 24px 0;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
         }
 
-        .footer-copy {
-            font-size: 0.55rem;
-            font-weight: 300;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.25);
+        .footer-bottom a:hover { color: var(--white); }
+
+        /* GIANT WORDMARK al fondo del footer */
+        .footer-wordmark {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: -8px;
+        }
+
+        .footer-wordmark svg {
+            width: 100%;
+            height: auto;
+            fill: var(--white);
+            display: block;
         }
 
         /* ═══════════════════════════════════════
-           ANIMATIONS
+           REVEAL ANIMATIONS
         ═══════════════════════════════════════ */
         .reveal {
             opacity: 0;
             transform: translateY(28px);
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: opacity 0.9s cubic-bezier(0.25,0.46,0.45,0.94),
+                        transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        .reveal.visible { opacity: 1; transform: translateY(0); }
         .d1 { transition-delay: 0.1s; }
         .d2 { transition-delay: 0.2s; }
         .d3 { transition-delay: 0.3s; }
-        .d4 { transition-delay: 0.4s; }
-        .d5 { transition-delay: 0.5s; }
 
         /* ═══════════════════════════════════════
-           RESPONSIVE — TABLET (960px)
+           RESPONSIVE
         ═══════════════════════════════════════ */
-        @media (max-width: 960px) {
-            .concepto-inner {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
-
-            .lineas-grid {
-                grid-template-columns: 1fr;
-                gap: 1px;
-            }
-
-            .linea-item {
-                padding: 40px 30px;
-            }
-
-            .proximamente-grid {
-                flex-direction: column;
-                align-items: center;
-                gap: 22px;
-            }
-
-            .product-card {
-                max-width: 320px;
-                width: 80%;
-            }
-
-            .cta-links {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .cta-separator {
-                display: none;
-            }
-
-            .ig-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        @media (max-width: 1024px) {
+            .manifiesto-inner { grid-template-columns: 1fr; gap: 50px; }
+            .productos-grid { grid-template-columns: repeat(2, 1fr); }
+            .productos-header { grid-template-columns: 1fr; gap: 16px; }
+            .productos-sub { text-align: left; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
         }
 
-        /* ═══════════════════════════════════════
-           RESPONSIVE — TABLET SMALL (768px)
-        ═══════════════════════════════════════ */
         @media (max-width: 768px) {
-            .hero {
-                height: 85vh;
-                min-height: 500px;
-            }
-
-            .hero-headline .line {
-                font-size: clamp(1.4rem, 5.5vw, 2.2rem);
-            }
-
-            .concepto { padding: 70px 30px 80px; }
-            .lineas { padding: 70px 30px 80px; }
-            .proximamente { padding: 70px 30px 80px; }
-            .cta { padding: 70px 30px; }
-            .ig-feed { padding: 60px 30px 70px; }
-
-            .product-card {
-                width: 90%;
-            }
-
-            .material-item {
-                width: 250px;
-                height: 180px;
-            }
-        }
-
-        /* ═══════════════════════════════════════
-           RESPONSIVE — MOBILE (600px)
-        ═══════════════════════════════════════ */
-        @media (max-width: 600px) {
-            nav { padding: 22px 24px; }
-            nav.scrolled { padding: 16px 24px; }
+            .topbar { padding: 10px 20px; }
+            .topbar-logo svg { height: 18px; }
+            .topbar-link { font-size: 0.7rem; }
 
             .hero {
-                height: 80vh;
-                min-height: 420px;
+                height: calc(100vh - 38px);
+                height: calc(100dvh - 38px);
             }
 
-            .hero-center { padding: 0 24px; }
+            .hero-text { font-size: 1.2rem; white-space: normal; text-align: center; padding: 0 6%; }
 
-            .hero-headline {
-                width: 90vw;
-            }
+            .wordmark-band { padding: 22px 0 32px; }
+            .wordmark-band svg { width: 98vw; }
 
-            .hero-headline .line {
-                font-size: 1.5rem;
-            }
+            .manifiesto { padding: 70px 6% 80px; }
+            .manifiesto-headline { font-size: 2.5rem; }
+            .manifiesto-sticker { max-width: 280px; margin-top: 30px; }
 
-            .hero-bottom {
-                padding: 0 24px 22px;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: flex-end;
-            }
+            .ticker-item { font-size: 1.6rem; }
 
-            .hero-location {
-                font-size: 0.5rem;
-            }
+            .productos { padding: 70px 6% 70px; }
+            .productos-grid { grid-template-columns: 1fr; gap: 30px; }
 
-            .hero-tagline {
-                font-size: 0.5rem;
-            }
+            .cta { padding: 70px 6% 80px; }
+            .cta-headline span { white-space: normal; }
+            .cta-form { flex-direction: column; border-radius: 18px; padding: 8px; gap: 6px; }
+            .cta-form input { padding: 14px 22px; }
+            .cta-form button { border-radius: 12px; padding: 14px; }
 
-            .scroll-indicator {
-                display: none;
-            }
+            .ig-feed { padding: 70px 6% 70px; }
+            .ig-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .ig-grid { grid-template-columns: 1fr; gap: 16px; }
 
-            .concepto { padding: 50px 24px 60px; }
-            .concepto-title { font-size: 1.15rem; }
-
-            .materiales { padding: 60px 0; }
-
-            .lineas { padding: 50px 24px 60px; }
-            .lineas-grid { gap: 1px; }
-            .linea-item { padding: 35px 24px; }
-            .linea-name { font-size: 1.3rem; }
-
-            .proximamente { padding: 50px 24px 70px; }
-
-            .product-card {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .cta { padding: 55px 24px; }
-
-            .ig-feed { padding: 50px 24px 60px; }
-
-            .ig-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            footer {
-                padding: 40px 24px 24px;
-            }
-
-            .footer-inner {
-                flex-direction: column-reverse;
-                align-items: flex-start;
-                gap: 35px;
-            }
-
-            .footer-logo {
-                align-self: flex-end;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 6px;
-                align-items: flex-start;
-            }
+            footer { padding: 60px 6% 0; }
+            .footer-grid { grid-template-columns: 1fr; gap: 36px; padding-bottom: 50px; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
         }
     </style>
 </head>
@@ -983,299 +739,267 @@
 
     <!-- PRELOADER -->
     <div class="preloader" id="preloader">
-        <img src="images/gd.png" alt="gd." class="preloader-logo">
+        <div class="preloader-logo">
+            <img src="images/StickerGranDan.svg" alt="grandanés">
+        </div>
     </div>
 
-    <!-- NAV -->
-    <nav id="mainNav">
-        <div class="nav-inner">
-            <img src="images/GrandanesStudio.png" alt="grandanés studio" class="nav-logo">
-            <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener" class="nav-link">@grandanes.studio</a>
+    <!-- TOP BAR (azul) -->
+    <div class="topbar">
+        <a href="#" class="topbar-logo" aria-label="grandanés - GD.">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 502.13">
+                <path d="M502.52,11.59h232.78c144.91,0,253.6,65.94,253.6,242.01s-113.76,239.11-260.85,239.11h-225.53V11.59ZM836.01,254.32v-2.89c0-104.34-31.88-141.3-111.59-141.3h-58.15c-8.41,0-15.22,6.82-15.22,15.22v254.31c0,8.41,6.82,15.22,15.22,15.22h55.98c81.15,0,113.76-37.68,113.76-140.57Z"/>
+                <path d="M959.95,357.21h102.42c9.74,0,17.63,7.89,17.63,17.63v98.79c0,9.74-7.89,17.63-17.63,17.63h-102.42c-9.74,0-17.63-7.89-17.63-17.63v-98.79c0-9.74,7.89-17.63,17.63-17.63Z"/>
+                <path d="M0,260.13C0,96.37,94.92,0,249.26,0c131.87,0,203.61,71.01,218.1,181.15h-137.67c-6.52-45.65-34.78-68.84-80.43-68.84-65.21,0-99.27,50.72-99.27,147.09v9.42c0,87.68,38.4,134.05,103.61,134.05,46.37,0,82.6-24.63,86.23-70.29h-78.98v-91.3h210.85v249.98h-129.7v-57.96c-22.46,40.57-65.21,68.83-131.15,68.83C82.6,502.13,0,405.05,0,260.13Z"/>
+            </svg>
+        </a>
+        <div class="topbar-right">
+            <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener" class="topbar-link">@grandanes.studio</a>
         </div>
-    </nav>
+    </div>
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-bg" id="heroBg"></div>
-        <div class="hero-overlay"></div>
+        <img src="images/Hero-Web-NEW.jpg" alt="Cama Sentado de grandanés" class="hero-img">
 
-        <div class="hero-center">
-            <h1 class="hero-headline">
-                <div class="line">Está llegando el mueble</div>
-                <div class="line">para quien manda</div>
-                <div class="line">en la casa.</div>
-            </h1>
+        <div class="hero-text">
+            Está llegando el mueble<br>
+            para <span class="highlight">quien manda</span> en la<br>
+            casa.
         </div>
 
-        <div class="hero-bottom">
-            <div class="hero-location">
-                Córdoba<br>CBA, Argentina.
-            </div>
-            <div class="hero-tagline">
-                /Diseño de mobiliario y<br>objetos para mascotas.
-            </div>
-        </div>
-
-        <div class="scroll-indicator">
-            <div class="scroll-line"></div>
+        <div class="hero-wordmark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3199.52 502.13">
+                <path d="M0,309.59C0,179.3,75.52,102.62,198.32,102.62c104.92,0,162,56.49,173.53,144.13h-109.54c-5.19-36.32-27.67-54.77-63.99-54.77-51.89,0-78.98,40.35-78.98,117.03v7.5c0,69.76,30.55,106.65,82.44,106.65,36.9,0,65.72-19.6,68.6-55.93h-62.84v-72.64h167.76v198.89h-103.19v-46.11c-17.87,32.28-51.89,54.76-104.35,54.76C65.72,502.13,0,424.89,0,309.59Z"/>
+                <path d="M399.82,110.7h166.03c128.56,0,160.84,43.24,160.84,102.04s-38.63,90.51-96.85,101.47c67.45,10.37,91.09,54.76,102.61,133.17,2.31,15.57,3.46,36.31,4.61,46.11h-118.76c0-2.3-.58-13.25-1.73-23.63-6.34-67.46-24.21-113.57-75.52-114.72h-25.37v138.35h-115.88V110.7ZM539.33,295.18c48.42,0,75.52-24.8,75.52-61.11,0-34.01-18.45-52.46-66.88-52.46h-20.11c-6.73,0-12.18,5.45-12.18,12.18v89.22c0,6.73,5.45,12.18,12.18,12.18h11.46Z"/>
+                <path d="M855.81,110.7h129.14l130.29,382.79h-124.52l-28.25-88.21h-116.45l-29.4,88.21h-95.12l134.32-382.79ZM944.59,336.1l-26.21-83.48c-3.59-11.43-19.67-11.67-23.61-.36l-29.16,83.83h78.98Z"/>
+                <path d="M1105.99,111.85h129.71l114.55,177.81c6.82,10.59,23.23,5.76,23.23-6.84V111.85h92.24v382.79h-112.42l-131.8-207.26c-6.78-10.66-23.27-5.86-23.27,6.77v200.48h-92.24V111.85Z"/>
+                <path d="M1946.49,111.85h129.14l130.29,382.79h-124.52l-28.25-88.21h-116.45l-29.4,88.21h-95.12l134.32-382.79ZM2035.28,337.25l-26.21-83.48c-3.59-11.43-19.67-11.67-23.61-.36l-29.16,83.83h78.98Z"/>
+                <path d="M1490.25,111.85h185.21c115.3,0,201.77,52.46,201.77,192.55s-90.51,190.24-207.54,190.24h-179.44V111.85ZM1755.58,304.97v-2.3c0-83.02-25.37-112.42-88.78-112.42h-46.27c-6.69,0-12.11,5.42-12.11,12.11v202.34c0,6.69,5.42,12.11,12.11,12.11h44.54c64.57,0,90.51-29.98,90.51-111.84Z"/>
+                <path d="M2580.94,111.85h299.78v81.86h-171.64c-6.77,0-12.26,5.49-12.26,12.26v41.2c0,6.77,5.49,12.26,12.26,12.26h97.27v83h-97.27c-6.77,0-12.26,5.49-12.26,12.26v44.08c0,6.77,5.49,12.26,12.26,12.26h176.25v83.59h-304.39V111.85ZM2734.87,0h121.64v11.53l-125.68,77.25h-28.25L2734.87,0Z"/>
+                <path d="M2856.51,368.96h96.28c7.49,37.46,30.55,57.64,80.71,57.64,29.98,0,47.85-13.83,47.85-35.75s-36.32-29.98-81.28-40.35c-61.11-14.41-135.48-37.48-135.48-115.88s68.03-130.86,164.3-130.86c104.35,0,158.54,53.04,164.3,131.44h-95.12c-6.34-37.48-24.21-55.93-69.76-55.93-28.83,0-46.12,14.41-46.12,35.75,0,26.52,40.93,32.86,87.63,43.24,60.53,13.26,129.71,34.59,129.71,114.14s-62.84,129.72-164.88,129.72c-111.84,0-170.64-61.11-178.14-133.17Z"/>
+                <path d="M2196.68,111.85h129.71l114.55,177.81c6.82,10.59,23.23,5.76,23.23-6.84V111.85h92.24v382.79h-112.42l-131.80-207.26c-6.78-10.66-23.27-5.86-23.27,6.77v200.48h-92.24V111.85Z"/>
+            </svg>
         </div>
     </section>
 
-    <!-- CONCEPTO -->
-    <section class="concepto">
-        <div class="concepto-inner">
+    <!-- MANIFIESTO -->
+    <section class="manifiesto">
+        <div class="manifiesto-inner">
             <div>
-                <div class="concepto-label reveal">/Concepto</div>
-                <h2 class="concepto-title reveal d1">
-                    Mejoramos la habitabilidad<br>
-                    de las mascotas a través del diseño.
+                <div class="manifiesto-eyebrow reveal">Córdoba, Argentina.</div>
+                <h2 class="manifiesto-headline reveal d1">
+                    Diseñamos<br>
+                    para ellos.
                 </h2>
-            </div>
-            <div class="concepto-right">
-                <p class="reveal d2">Grandanés nace de la búsqueda por habitar los espacios del hogar junto a nuestras mascotas de una forma orgánica, estética y funcional.</p>
-                <p class="reveal d3">Desde una mirada proyectual y arquitectónica, desarrollamos mobiliario y objetos que se integran visual y funcionalmente al entorno doméstico.</p>
-                <p class="reveal d4">Cada pieza busca convivir con el espacio, no imponerse, sino acompañar, desde la calidez de los materiales y la simpleza de la forma.</p>
-                <p class="reveal d5">Nos define la simpleza, los materiales nobles y una estética que combina la funcionalidad y la armonía.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- MATERIALES / PROCESO -->
-    <section class="materiales">
-        <div class="materiales-label reveal">/Materiales</div>
-        <div class="materiales-track">
-            <div class="material-item">
-                <img src="images/Tela.jpg" alt="Tela">
-                <span class="material-label">Tela</span>
-            </div>
-            <div class="material-item">
-                <img src="images/aluminio.jpg" alt="Aluminio">
-                <span class="material-label">Aluminio</span>
-            </div>
-            <div class="material-item">
-                <img src="images/Fenolico.webp" alt="Fenólico">
-                <span class="material-label">Fenólico</span>
-            </div>
-            <div class="material-item">
-                <img src="images/Etiqueta.jpg" alt="Etiqueta">
-                <span class="material-label">Etiqueta</span>
-            </div>
-            <!-- Duplicado para loop continuo -->
-            <div class="material-item">
-                <img src="images/Tela.jpg" alt="Tela">
-                <span class="material-label">Tela</span>
-            </div>
-            <div class="material-item">
-                <img src="images/aluminio.jpg" alt="Aluminio">
-                <span class="material-label">Aluminio</span>
-            </div>
-            <div class="material-item">
-                <img src="images/Fenolico.webp" alt="Fenólico">
-                <span class="material-label">Fenólico</span>
-            </div>
-            <div class="material-item">
-                <img src="images/Etiqueta.jpg" alt="Etiqueta">
-                <span class="material-label">Etiqueta</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- LINEAS DE PRODUCTO -->
-    <section class="lineas">
-        <div class="lineas-label reveal">Nuestras líneas /sentado</div>
-        <div class="lineas-grid">
-            <div class="linea-item reveal d1">
-                <div class="linea-name">/Caño.</div>
-            </div>
-            <div class="linea-item reveal d2">
-                <div class="linea-name">/Madera.</div>
-            </div>
-            <div class="linea-item reveal d3">
-                <div class="linea-name">/Chapa.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROXIMAMENTE -->
-    <section class="proximamente">
-        <div class="proximamente-title reveal">Próximamente</div>
-        <div class="proximamente-grid">
-            <div class="product-card reveal d1">
-                <img src="images/Proximamente01.jpg" alt="Cama Sentado — madera y cordura" loading="lazy">
-                <div class="product-card-overlay">
-                    <div class="product-card-name">Está llegando</div>
+                <div class="manifiesto-text reveal d2">
+                    <p>Somos un estudio de diseño para mascotas.</p>
+                    <p>Hacemos cosas que nos gustan, con materiales que aguantan, para los que mandan de verdad en la casa.</p>
+                </div>
+                <div class="manifiesto-sticker reveal d3">
+                    <img src="images/Sticker-Web-NEW.svg" alt="quien manda en la casa.">
                 </div>
             </div>
-            <div class="product-card reveal d2">
-                <img src="images/Proximamente02.jpg" alt="Cama Sentado — estructura metálica" loading="lazy">
-                <div class="product-card-overlay">
-                    <div class="product-card-name">Está llegando</div>
-                </div>
-            </div>
-            <div class="product-card reveal d3">
-                <img src="images/Proximamente03.jpg" alt="Cama Sentado — modelo oscuro" loading="lazy">
-                <div class="product-card-overlay">
-                    <div class="product-card-name">Está llegando</div>
-                </div>
+            <div class="manifiesto-photo reveal d2">
+                <img src="images/Banner02-Web-NEW.jpg" alt="Bulldog francés en cama Sentado">
             </div>
         </div>
     </section>
 
-    <!-- CTA CONTACTO -->
-    <section class="cta">
-        <h3 class="cta-title reveal">¿Querés saber más?</h3>
-        <p class="cta-sub reveal d1">Escribinos o seguinos para conocer las novedades.</p>
-        <div class="cta-links reveal d2">
-            <a href="mailto:studiograndanes@gmail.com" class="cta-btn">Contacto</a>
-            <div class="cta-separator"></div>
-            <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener" class="cta-btn">Instagram</a>
+    <!-- BROWN TICKER -->
+    <div class="ticker">
+        <div class="ticker-track">
+            <span class="ticker-item">studiograndanes.com</span>
+            <span class="ticker-item">studiograndanes.com</span>
+            <span class="ticker-item">studiograndanes.com</span>
+            <span class="ticker-item">studiograndanes.com</span>
+            <span class="ticker-item">studiograndanes.com</span>
+            <span class="ticker-item">studiograndanes.com</span>
+            <span class="ticker-item">studiograndanes.com</span>
+            <span class="ticker-item">studiograndanes.com</span>
+        </div>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <section class="productos" id="productos">
+        <div class="productos-header">
+            <h2 class="productos-title reveal">Lo que se viene:</h2>
+            <p class="productos-sub reveal d1">Tres piezas diseñadas para tu mascota. Disponibles muy pronto en nuestra tienda online.</p>
+        </div>
+
+        <div class="productos-grid">
+            <div class="producto-card reveal d1">
+                <div class="producto-img-wrap">
+                    <img src="images/cesca.jpg" alt="Cama Cesca">
+                </div>
+                <div class="producto-name">Cama Cesca</div>
+            </div>
+
+            <div class="producto-card reveal d2">
+                <div class="producto-img-wrap">
+                    <img src="images/vetra.png" alt="Cama Vetra">
+                </div>
+                <div class="producto-name">Cama Vetra</div>
+            </div>
+
+            <div class="producto-card reveal d3">
+                <div class="producto-img-wrap">
+                    <img src="images/bloq.png" alt="Cama Bloq">
+                </div>
+                <div class="producto-name">Cama Bloq</div>
+            </div>
         </div>
     </section>
 
-    <!-- INSTAGRAM FEED -->
-    <section class="ig-feed">
-        <div class="ig-feed-header reveal">
-            <div class="ig-feed-label">/Seguinos</div>
-            <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener" class="ig-feed-handle">@grandanes.studio</a>
+    <!-- CTA NEWSLETTER -->
+    <section class="cta" id="newsletter">
+        <div class="cta-inner">
+            <div class="cta-eyebrow reveal">Se viene el lanzamiento</div>
+            <h2 class="cta-headline reveal d1"><span>Tu mascota tiene que ser</span><span>la primera en saberlo.</span></h2>
+            <p class="cta-text reveal d2">Dejanos tu mail y te avisamos apenas abramos la tienda. Sin spam, sin ruido.</p>
+            <form class="cta-form reveal d2" id="newsletterForm">
+                <input type="email" placeholder="tu@email.com" required>
+                <button type="submit">Avisame</button>
+            </form>
+            <div class="cta-msg" id="ctaMsg"></div>
+        </div>
+    </section>
+
+    <!-- IG FEED -->
+    <section class="ig-feed" id="instagram">
+        <div class="ig-header">
+            <h2 class="ig-title reveal">
+                Seguinos en<br>
+                <span class="at">@grandanes.studio</span>
+            </h2>
+            <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener" class="ig-cta reveal d1">Ir al perfil →</a>
         </div>
         <div class="ig-grid">
             <a class="ig-item reveal d1" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
-                <img class="ig-item-inner" src="images/01.jpg" alt="grandanés studio" loading="lazy">
+                <img src="images/Post01-NEW.jpg" alt="Grandanés - Diseñamos para ellos." loading="lazy">
             </a>
             <a class="ig-item reveal d2" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
-                <img class="ig-item-inner" src="images/02.jpg" alt="grandanés studio" loading="lazy">
+                <img src="images/Post02-NEW.jpg" alt="Sticker Gran-Danés Design Studio" loading="lazy">
             </a>
             <a class="ig-item reveal d3" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
-                <img class="ig-item-inner" src="images/03.jpg" alt="grandanés studio" loading="lazy">
+                <img src="images/Post03-NEW.jpg" alt="Está llegando el mueble" loading="lazy">
             </a>
-        </div>
-        <div class="ig-follow reveal">
-            <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">Seguir en Instagram</a>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-inner">
-            <div class="footer-left">
-                <div class="footer-contact">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <svg class="footer-brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3199.52 502.13">
+                        <path d="M0,309.59C0,179.3,75.52,102.62,198.32,102.62c104.92,0,162,56.49,173.53,144.13h-109.54c-5.19-36.32-27.67-54.77-63.99-54.77-51.89,0-78.98,40.35-78.98,117.03v7.5c0,69.76,30.55,106.65,82.44,106.65,36.9,0,65.72-19.6,68.6-55.93h-62.84v-72.64h167.76v198.89h-103.19v-46.11c-17.87,32.28-51.89,54.76-104.35,54.76C65.72,502.13,0,424.89,0,309.59Z"/>
+                        <path d="M399.82,110.7h166.03c128.56,0,160.84,43.24,160.84,102.04s-38.63,90.51-96.85,101.47c67.45,10.37,91.09,54.76,102.61,133.17,2.31,15.57,3.46,36.31,4.61,46.11h-118.76c0-2.3-.58-13.25-1.73-23.63-6.34-67.46-24.21-113.57-75.52-114.72h-25.37v138.35h-115.88V110.7ZM539.33,295.18c48.42,0,75.52-24.8,75.52-61.11,0-34.01-18.45-52.46-66.88-52.46h-20.11c-6.73,0-12.18,5.45-12.18,12.18v89.22c0,6.73,5.45,12.18,12.18,12.18h11.46Z"/>
+                        <path d="M855.81,110.7h129.14l130.29,382.79h-124.52l-28.25-88.21h-116.45l-29.4,88.21h-95.12l134.32-382.79ZM944.59,336.1l-26.21-83.48c-3.59-11.43-19.67-11.67-23.61-.36l-29.16,83.83h78.98Z"/>
+                        <path d="M1105.99,111.85h129.71l114.55,177.81c6.82,10.59,23.23,5.76,23.23-6.84V111.85h92.24v382.79h-112.42l-131.8-207.26c-6.78-10.66-23.27-5.86-23.27,6.77v200.48h-92.24V111.85Z"/>
+                        <path d="M1946.49,111.85h129.14l130.29,382.79h-124.52l-28.25-88.21h-116.45l-29.4,88.21h-95.12l134.32-382.79ZM2035.28,337.25l-26.21-83.48c-3.59-11.43-19.67-11.67-23.61-.36l-29.16,83.83h78.98Z"/>
+                        <path d="M1490.25,111.85h185.21c115.3,0,201.77,52.46,201.77,192.55s-90.51,190.24-207.54,190.24h-179.44V111.85ZM1755.58,304.97v-2.3c0-83.02-25.37-112.42-88.78-112.42h-46.27c-6.69,0-12.11,5.42-12.11,12.11v202.34c0,6.69,5.42,12.11,12.11,12.11h44.54c64.57,0,90.51-29.98,90.51-111.84Z"/>
+                        <path d="M2580.94,111.85h299.78v81.86h-171.64c-6.77,0-12.26,5.49-12.26,12.26v41.2c0,6.77,5.49,12.26,12.26,12.26h97.27v83h-97.27c-6.77,0-12.26,5.49-12.26,12.26v44.08c0,6.77,5.49,12.26,12.26,12.26h176.25v83.59h-304.39V111.85ZM2734.87,0h121.64v11.53l-125.68,77.25h-28.25L2734.87,0Z"/>
+                        <path d="M2856.51,368.96h96.28c7.49,37.46,30.55,57.64,80.71,57.64,29.98,0,47.85-13.83,47.85-35.75s-36.32-29.98-81.28-40.35c-61.11-14.41-135.48-37.48-135.48-115.88s68.03-130.86,164.3-130.86c104.35,0,158.54,53.04,164.3,131.44h-95.12c-6.34-37.48-24.21-55.93-69.76-55.93-28.83,0-46.12,14.41-46.12,35.75,0,26.52,40.93,32.86,87.63,43.24,60.53,13.26,129.71,34.59,129.71,114.14s-62.84,129.72-164.88,129.72c-111.84,0-170.64-61.11-178.14-133.17Z"/>
+                        <path d="M2196.68,111.85h129.71l114.55,177.81c6.82,10.59,23.23,5.76,23.23-6.84V111.85h92.24v382.79h-112.42l-131.8-207.26c-6.78-10.66-23.27-5.86-23.27,6.77v200.48h-92.24V111.85Z"/>
+                    </svg>
+                    <p class="footer-tagline">Diseño para mascotas. Estudio independiente con base en Córdoba, Argentina.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Estudio</h4>
+                    <a href="#productos">Productos</a>
+                    <a href="#instagram">Instagram</a>
+                    <a href="#newsletter">Newsletter</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contacto</h4>
                     <a href="mailto:studiograndanes@gmail.com">studiograndanes@gmail.com</a>
                     <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">@grandanes.studio</a>
-                </div>
-                <div class="footer-meta">
-                    <span>Córdoba, CBA, Argentina.</span>
                     <span>+54 3543 602936</span>
                 </div>
+
+                <div class="footer-col">
+                    <h4>Ubicación</h4>
+                    <span>Córdoba</span>
+                    <span>CBA, Argentina</span>
+                </div>
             </div>
-            <img src="images/gd.png" alt="gd." class="footer-logo">
-        </div>
-        <div class="footer-bottom">
-            <span class="footer-copy" id="footerYear"></span>
-            <span class="footer-copy">Diseño y desarrollo por grandanés studio</span>
+
+            <div class="footer-bottom">
+                <span id="footerYear"></span>
+                <span>Todos los derechos reservados.</span>
+            </div>
+
+            <div class="footer-wordmark">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3199.52 502.13">
+                    <path d="M0,309.59C0,179.3,75.52,102.62,198.32,102.62c104.92,0,162,56.49,173.53,144.13h-109.54c-5.19-36.32-27.67-54.77-63.99-54.77-51.89,0-78.98,40.35-78.98,117.03v7.5c0,69.76,30.55,106.65,82.44,106.65,36.9,0,65.72-19.6,68.6-55.93h-62.84v-72.64h167.76v198.89h-103.19v-46.11c-17.87,32.28-51.89,54.76-104.35,54.76C65.72,502.13,0,424.89,0,309.59Z"/>
+                    <path d="M399.82,110.7h166.03c128.56,0,160.84,43.24,160.84,102.04s-38.63,90.51-96.85,101.47c67.45,10.37,91.09,54.76,102.61,133.17,2.31,15.57,3.46,36.31,4.61,46.11h-118.76c0-2.3-.58-13.25-1.73-23.63-6.34-67.46-24.21-113.57-75.52-114.72h-25.37v138.35h-115.88V110.7ZM539.33,295.18c48.42,0,75.52-24.8,75.52-61.11,0-34.01-18.45-52.46-66.88-52.46h-20.11c-6.73,0-12.18,5.45-12.18,12.18v89.22c0,6.73,5.45,12.18,12.18,12.18h11.46Z"/>
+                    <path d="M855.81,110.7h129.14l130.29,382.79h-124.52l-28.25-88.21h-116.45l-29.4,88.21h-95.12l134.32-382.79ZM944.59,336.1l-26.21-83.48c-3.59-11.43-19.67-11.67-23.61-.36l-29.16,83.83h78.98Z"/>
+                    <path d="M1105.99,111.85h129.71l114.55,177.81c6.82,10.59,23.23,5.76,23.23-6.84V111.85h92.24v382.79h-112.42l-131.8-207.26c-6.78-10.66-23.27-5.86-23.27,6.77v200.48h-92.24V111.85Z"/>
+                    <path d="M1946.49,111.85h129.14l130.29,382.79h-124.52l-28.25-88.21h-116.45l-29.4,88.21h-95.12l134.32-382.79ZM2035.28,337.25l-26.21-83.48c-3.59-11.43-19.67-11.67-23.61-.36l-29.16,83.83h78.98Z"/>
+                    <path d="M1490.25,111.85h185.21c115.3,0,201.77,52.46,201.77,192.55s-90.51,190.24-207.54,190.24h-179.44V111.85ZM1755.58,304.97v-2.3c0-83.02-25.37-112.42-88.78-112.42h-46.27c-6.69,0-12.11,5.42-12.11,12.11v202.34c0,6.69,5.42,12.11,12.11,12.11h44.54c64.57,0,90.51-29.98,90.51-111.84Z"/>
+                    <path d="M2580.94,111.85h299.78v81.86h-171.64c-6.77,0-12.26,5.49-12.26,12.26v41.2c0,6.77,5.49,12.26,12.26,12.26h97.27v83h-97.27c-6.77,0-12.26,5.49-12.26,12.26v44.08c0,6.77,5.49,12.26,12.26,12.26h176.25v83.59h-304.39V111.85ZM2734.87,0h121.64v11.53l-125.68,77.25h-28.25L2734.87,0Z"/>
+                    <path d="M2856.51,368.96h96.28c7.49,37.46,30.55,57.64,80.71,57.64,29.98,0,47.85-13.83,47.85-35.75s-36.32-29.98-81.28-40.35c-61.11-14.41-135.48-37.48-135.48-115.88s68.03-130.86,164.3-130.86c104.35,0,158.54,53.04,164.3,131.44h-95.12c-6.34-37.48-24.21-55.93-69.76-55.93-28.83,0-46.12,14.41-46.12,35.75,0,26.52,40.93,32.86,87.63,43.24,60.53,13.26,129.71,34.59,129.71,114.14s-62.84,129.72-164.88,129.72c-111.84,0-170.64-61.11-178.14-133.17Z"/>
+                    <path d="M2196.68,111.85h129.71l114.55,177.81c6.82,10.59,23.23,5.76,23.23-6.84V111.85h92.24v382.79h-112.42l-131.80-207.26c-6.78-10.66-23.27-5.86-23.27,6.77v200.48h-92.24V111.85Z"/>
+                </svg>
+            </div>
         </div>
     </footer>
 
     <script>
-        /* ═══════════════════════════════════════
-           PRELOADER
-        ═══════════════════════════════════════ */
+        /* PRELOADER */
         window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
             setTimeout(() => {
-                preloader.classList.add('loaded');
-                document.body.classList.add('ready');
-            }, 1200);
+                document.getElementById('preloader').classList.add('loaded');
+            }, 1600);
         });
 
-        /* ═══════════════════════════════════════
-           FOOTER — AÑO DINÁMICO
-        ═══════════════════════════════════════ */
+        /* AÑO DINÁMICO */
         document.getElementById('footerYear').textContent =
-            '\u00A9 ' + new Date().getFullYear() + ' grandanés studio';
+            '© ' + new Date().getFullYear() + ' grandanés studio.';
 
-        /* ═══════════════════════════════════════
-           INTERSECTION OBSERVER — REVEAL
-        ═══════════════════════════════════════ */
-        const revealObserver = new IntersectionObserver((entries) => {
+        /* REVEAL ON SCROLL */
+        const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    revealObserver.unobserve(entry.target);
+                    obs.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-        /* ═══════════════════════════════════════
-           PARALLAX HERO
-        ═══════════════════════════════════════ */
-        const heroBg = document.getElementById('heroBg');
-        const hero = document.querySelector('.hero');
-
-        function updateParallax() {
-            const scrollY = window.scrollY;
-            const heroH = hero.offsetHeight;
-
-            if (scrollY < heroH) {
-                const parallaxOffset = scrollY * 0.35;
-                heroBg.style.transform = `translateY(${parallaxOffset}px)`;
-            }
-        }
-
-        /* ═══════════════════════════════════════
-           NAV SCROLL EFFECT
-        ═══════════════════════════════════════ */
-        const navEl = document.getElementById('mainNav');
-
-        function updateNav() {
-            if (window.scrollY > 80) {
-                navEl.classList.add('scrolled');
-            } else {
-                navEl.classList.remove('scrolled');
-            }
-        }
-
-        /* ═══════════════════════════════════════
-           SMOOTH SCROLL (Lenis-style)
-        ═══════════════════════════════════════ */
-        (function smoothScroll() {
-            let currentY = window.scrollY;
-            let targetY = window.scrollY;
-            const ease = 0.08;
-            let rafId = null;
-
-            function onScroll() {
-                targetY = window.scrollY;
-            }
-
-            function render() {
-                const diff = targetY - currentY;
-
-                if (Math.abs(diff) > 0.5) {
-                    currentY += diff * ease;
-                    updateParallax();
-                    updateNav();
+        /* SMOOTH ANCHOR LINKS */
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const href = a.getAttribute('href');
+                if (href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const top = target.getBoundingClientRect().top + window.scrollY - 60;
+                    window.scrollTo({ top, behavior: 'smooth' });
                 }
-
-                rafId = requestAnimationFrame(render);
-            }
-
-            window.addEventListener('scroll', onScroll, { passive: true });
-            render();
-
-            /* Anchor smooth scroll */
-            document.querySelectorAll('a[href^="#"]').forEach(a => {
-                a.addEventListener('click', e => {
-                    const target = document.querySelector(a.getAttribute('href'));
-                    if (target) {
-                        e.preventDefault();
-                        const top = target.getBoundingClientRect().top + window.scrollY;
-                        window.scrollTo({ top, behavior: 'smooth' });
-                    }
-                });
             });
-        })();
+        });
+
+        /* NEWSLETTER FORM (mailto) */
+        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value.trim();
+            const msg = document.getElementById('ctaMsg');
+            if (!email) return;
+
+            const subject = encodeURIComponent('Sumame al newsletter');
+            const body = encodeURIComponent(`Hola, quiero estar al tanto del lanzamiento.\n\nMail: ${email}\n\n¡Gracias!`);
+            window.location.href = `mailto:studiograndanes@gmail.com?subject=${subject}&body=${body}`;
+
+            msg.textContent = 'Listo. Abrimos tu cliente de email — mandanos el mail y te sumamos.';
+            e.target.querySelector('input').value = '';
+            setTimeout(() => { msg.textContent = ''; }, 6000);
+        });
     </script>
 
 </body>
