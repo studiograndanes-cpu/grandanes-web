@@ -79,19 +79,14 @@
             display: block;
             width: 75px;
             height: auto;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
-        }
-
-        .etiqueta:hover {
-            transform: translateY(-50%) translateX(8px);
         }
 
         .etiqueta img {
             width: 100%;
             height: auto;
             display: block;
-            filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.18));
+            filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.25));
         }
 
         /* ═══════════════════════════════════════
@@ -986,6 +981,31 @@
     </footer>
 
     <script>
+        /* LOCK HERO HEIGHT EN MOBILE
+           Evita que el hero se redimensione al scrollear cuando la
+           barra del navegador se muestra/oculta. */
+        function lockHeroHeight() {
+            const hero = document.querySelector('.hero');
+            const topbar = document.querySelector('.topbar');
+            if (!hero || !topbar) return;
+
+            if (window.innerWidth <= 768) {
+                hero.style.height = (window.innerHeight - topbar.offsetHeight) + 'px';
+            } else {
+                hero.style.height = '';
+            }
+        }
+        lockHeroHeight();
+        window.addEventListener('orientationchange', () => setTimeout(lockHeroHeight, 200));
+        window.addEventListener('resize', () => {
+            // Solo recalcular si el ancho cambia (evita el bug del address bar móvil)
+            if (window.__lastWidth !== window.innerWidth) {
+                window.__lastWidth = window.innerWidth;
+                lockHeroHeight();
+            }
+        });
+        window.__lastWidth = window.innerWidth;
+
         /* PRELOADER */
         window.addEventListener('load', () => {
             setTimeout(() => {
