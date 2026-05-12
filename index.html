@@ -306,6 +306,99 @@
         }
 
         /* ═══════════════════════════════════════
+           HISTORIA / EQUIPO
+        ═══════════════════════════════════════ */
+        .historia {
+            background: var(--white);
+            color: var(--grafito);
+            padding: 110px 6% 120px;
+            border-top: 1px solid rgba(30,30,30,0.06);
+        }
+
+        .historia-header {
+            max-width: 1300px;
+            margin: 0 auto 50px;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 60px;
+            align-items: end;
+        }
+
+        .historia-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--grafito);
+            opacity: 0.7;
+            margin-bottom: 18px;
+        }
+
+        .historia-title {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+            line-height: 1;
+            letter-spacing: -0.025em;
+            color: var(--grafito);
+        }
+
+        .historia-text {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--grafito);
+            opacity: 0.85;
+            max-width: 420px;
+        }
+
+        .historia-text p {
+            margin-bottom: 12px;
+        }
+
+        .historia-media {
+            max-width: 1300px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            position: relative;
+            background: #f4f1ec;
+        }
+
+        .historia-media img,
+        .historia-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════
+           PROCESO — video full-width
+        ═══════════════════════════════════════ */
+        .proceso {
+            background: var(--white);
+            padding: 0;
+            width: 100%;
+            line-height: 0;
+        }
+
+        .proceso-media {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            position: relative;
+            background: #f4f1ec;
+        }
+
+        .proceso-media video,
+        .proceso-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════
            BROWN TICKER — STUDIOGRANDANES.COM
         ═══════════════════════════════════════ */
         .ticker {
@@ -428,6 +521,16 @@
             font-size: 1.6rem;
             letter-spacing: -0.01em;
             color: var(--grafito);
+            margin-bottom: 8px;
+        }
+
+        .producto-desc {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--grafito);
+            opacity: 0.7;
+            max-width: 320px;
         }
 
         /* ═══════════════════════════════════════
@@ -713,6 +816,7 @@
         ═══════════════════════════════════════ */
         @media (max-width: 1024px) {
             .manifiesto-inner { grid-template-columns: 1fr; gap: 50px; }
+            .historia-header { grid-template-columns: 1fr; gap: 24px; align-items: start; }
             .productos-grid { grid-template-columns: repeat(2, 1fr); }
             .productos-header { grid-template-columns: 1fr; gap: 16px; }
             .productos-sub { text-align: left; }
@@ -744,6 +848,12 @@
 
             .productos { padding: 70px 6% 70px; }
             .productos-grid { grid-template-columns: 1fr; gap: 30px; }
+
+            .historia { padding: 80px 6% 80px; }
+            .historia-title { font-size: 2.4rem; }
+            .historia-media { aspect-ratio: 4 / 3; }
+
+            .proceso-media { aspect-ratio: 4 / 3; }
 
             .cta { padding: 70px 6% 80px; }
             .cta-headline .line-desktop { display: none; }
@@ -834,6 +944,33 @@
         </div>
     </section>
 
+    <!-- HISTORIA / EQUIPO -->
+    <section class="historia" id="historia">
+        <div class="historia-header">
+            <div>
+                <div class="historia-eyebrow reveal">/ La historia</div>
+                <h2 class="historia-title reveal d1">Empezó con un perro<br>y una cama incómoda.</h2>
+            </div>
+            <div class="historia-text reveal d2">
+                <p>Grandanés nació en Córdoba, mirando a nuestros perros buscando dónde dormir y dándonos cuenta de que el diseño de muebles para mascotas era mediocre.</p>
+                <p>Así que decidimos hacerlo nosotros.</p>
+            </div>
+        </div>
+
+        <div class="historia-media reveal d2">
+            <img src="images/AboutUs.jpg" alt="Historia grandanés">
+        </div>
+    </section>
+
+    <!-- PROCESO — video full-width -->
+    <section class="proceso" id="proceso">
+        <div class="proceso-media">
+            <video autoplay muted loop playsinline poster="images/Hero-Web-NEW.jpg">
+                <source src="images/LoopProceso.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
     <!-- BROWN TICKER -->
     <div class="ticker">
         <div class="ticker-track">
@@ -851,8 +988,8 @@
     <!-- PRODUCTOS -->
     <section class="productos" id="productos">
         <div class="productos-header">
-            <h2 class="productos-title reveal">Lo que se viene:</h2>
-            <p class="productos-sub reveal d1">Tres piezas diseñadas para tu mascota. Disponibles muy pronto en nuestra tienda online.</p>
+            <h2 class="productos-title reveal">Tienda Online, próximamente.</h2>
+            <p class="productos-sub reveal d1">Tres muebles de diseño. Como los que te gustan a vos, pero para el que realmente manda. Muy pronto disponibles en nuestra tienda online.</p>
         </div>
 
         <div class="productos-grid">
@@ -861,6 +998,7 @@
                     <img src="images/CamaCesca.jpg" alt="Cama Cesca">
                 </div>
                 <div class="producto-name">Cama Cesca</div>
+                <p class="producto-desc">Cama tipo ménsula, hecha de acero tubular cromado curvado.</p>
             </div>
 
             <div class="producto-card reveal d2">
@@ -868,6 +1006,7 @@
                     <img src="images/Vetra.jpg" alt="Cama Vetra">
                 </div>
                 <div class="producto-name">Cama Vetra</div>
+                <p class="producto-desc">Fenólico de alta calidad, insertos roscados y almohadón anti-desgarro.</p>
             </div>
 
             <div class="producto-card reveal d3">
@@ -875,6 +1014,7 @@
                     <img src="images/CamaMódulo.jpg" alt="Cama Módulo">
                 </div>
                 <div class="producto-name">Cama Módulo</div>
+                <p class="producto-desc">Estructura en chapa plegada, pintura epoxi/laqueada, y almohadón de eco-cuero.</p>
             </div>
         </div>
     </section>
