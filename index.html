@@ -90,6 +90,99 @@
         }
 
         /* ═══════════════════════════════════════
+           BACK TO TOP — botón flotante
+        ═══════════════════════════════════════ */
+        .back-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 95;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--grafito);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        }
+
+        .back-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-top:hover {
+            background: var(--azul);
+        }
+
+        /* ═══════════════════════════════════════
+           STICKY MOBILE CTA
+        ═══════════════════════════════════════ */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 90;
+            background: var(--azul);
+            color: var(--white);
+            padding: 14px 18px;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 -4px 18px rgba(0,0,0,0.12);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+
+        .sticky-cta.visible {
+            transform: translateY(0);
+        }
+
+        .sticky-cta-text {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            line-height: 1.3;
+            font-weight: 500;
+        }
+
+        .sticky-cta-text small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-top: 1px;
+        }
+
+        .sticky-cta-btn {
+            background: var(--white);
+            color: var(--azul);
+            border: none;
+            border-radius: 99px;
+            padding: 10px 18px;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════
            PRELOADER
         ═══════════════════════════════════════ */
         .preloader {
@@ -135,6 +228,44 @@
             width: auto;
             fill: var(--white);
         }
+
+        .topbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .topbar-nav a {
+            position: relative;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            opacity: 0.85;
+            text-decoration: none;
+            padding: 4px 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .topbar-nav a:hover,
+        .topbar-nav a.active { opacity: 1; }
+
+        .topbar-nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 2px;
+            background: var(--white);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+
+        .topbar-nav a.active::after,
+        .topbar-nav a:hover::after { transform: scaleX(1); }
 
         .topbar-right {
             display: flex;
@@ -201,6 +332,15 @@
             white-space: nowrap;
         }
 
+        .hero-text-headline {
+            display: block;
+        }
+
+        .hero-text-cta-wrap {
+            text-align: center;
+            white-space: normal;
+        }
+
         .hero-text .highlight {
             display: inline-block;
             background: var(--azul);
@@ -211,6 +351,93 @@
             line-height: 1;
             box-decoration-break: clone;
             -webkit-box-decoration-break: clone;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 28px;
+            padding: 12px 22px;
+            background: var(--azul);
+            color: var(--white);
+            border: none;
+            border-radius: 99px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            background: var(--white);
+            color: var(--azul);
+            transform: translateY(-2px);
+        }
+
+        .hero-cta-arrow {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover .hero-cta-arrow {
+            transform: translateY(3px);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 16%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            pointer-events: none;
+            opacity: 0;
+            animation: scrollIndicatorIn 0.8s ease 1.6s forwards;
+        }
+
+        .scroll-indicator-label {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .scroll-indicator-line {
+            width: 1px;
+            height: 40px;
+            background: rgba(255,255,255,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-indicator-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.95);
+            animation: scrollPulse 1.8s ease infinite;
+        }
+
+        @keyframes scrollPulse {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+
+        @keyframes scrollIndicatorIn {
+            to { opacity: 1; }
         }
 
         /* GRANDANÉS gigante encima de la imagen, en la base del hero */
@@ -355,6 +582,24 @@
             margin-bottom: 12px;
         }
 
+        .historia-text p strong {
+            font-weight: 700;
+            opacity: 1;
+        }
+
+        .historia-sticker {
+            margin-top: 28px;
+            max-width: 320px;
+            transform: rotate(-3deg);
+        }
+
+        .historia-sticker img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+        }
+
         .historia-media {
             max-width: 1300px;
             margin: 0 auto;
@@ -370,6 +615,117 @@
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        /* ═══════════════════════════════════════
+           FAQ — Acordeón
+        ═══════════════════════════════════════ */
+        .faq {
+            background: var(--white);
+            color: var(--grafito);
+            padding: 110px 6% 120px;
+        }
+
+        .faq-header {
+            max-width: 1300px;
+            margin: 0 auto 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 40px;
+        }
+
+        .faq-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-bottom: 14px;
+        }
+
+        .faq-title {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(2rem, 4.6vw, 4rem);
+            line-height: 1;
+            letter-spacing: -0.025em;
+        }
+
+        .faq-sub {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--grafito);
+            opacity: 0.7;
+            max-width: 340px;
+            text-align: right;
+        }
+
+        .faq-list {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-top: 1px solid rgba(30,30,30,0.12);
+        }
+
+        .faq-item:last-child {
+            border-bottom: 1px solid rgba(30,30,30,0.12);
+        }
+
+        .faq-q {
+            width: 100%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            padding: 26px 0;
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            color: var(--grafito);
+            text-align: left;
+        }
+
+        .faq-toggle {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--grafito);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 400;
+            transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), background 0.3s ease;
+        }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(45deg);
+            background: var(--azul);
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+
+        .faq-a-inner {
+            padding: 0 0 28px 0;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--grafito);
+            opacity: 0.8;
+            max-width: 720px;
         }
 
         /* ═══════════════════════════════════════
@@ -396,6 +752,249 @@
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        /* ═══════════════════════════════════════
+           PRODUCT CARD — selección
+        ═══════════════════════════════════════ */
+        .producto-card.selected .producto-img-wrap {
+            outline: 2px solid var(--azul);
+            outline-offset: 4px;
+        }
+
+        .producto-card.selected .producto-name {
+            color: var(--azul);
+        }
+
+        /* ═══════════════════════════════════════
+           SHOWCASE — Producto destacado (fit viewport)
+        ═══════════════════════════════════════ */
+        .showcase {
+            background: var(--white);
+            padding: 24px 6%;
+            min-height: calc(100vh - 46px);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .showcase-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .showcase-inner.fading {
+            opacity: 0.3;
+        }
+
+        .showcase-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            color: var(--grafito);
+            opacity: 0.6;
+            margin-bottom: 6px;
+        }
+
+        .showcase-title {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+            line-height: 1;
+            letter-spacing: -0.025em;
+            color: var(--grafito);
+            margin-bottom: 6px;
+        }
+
+        .showcase-tagline {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: var(--grafito);
+            opacity: 0.75;
+            max-width: 580px;
+            margin-bottom: 22px;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 32px;
+            align-items: stretch;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .showcase-media {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            min-height: 0;
+        }
+
+        .showcase-thumbs {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+            width: 72px;
+        }
+
+        .showcase-thumbs .showcase-thumb {
+            aspect-ratio: 1;
+            width: 100%;
+            height: auto;
+        }
+
+        .showcase-hero {
+            overflow: hidden;
+            background: var(--crema, #f4f1ec);
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            min-width: 0;
+        }
+
+        .showcase-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.4s ease;
+        }
+
+        .showcase-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(30, 30, 30, 0.55);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            line-height: 1;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            transition: background 0.3s ease, transform 0.3s ease;
+            opacity: 0.92;
+        }
+
+        .showcase-arrow:hover {
+            background: var(--azul);
+            opacity: 1;
+        }
+
+        .showcase-arrow-prev { left: 14px; }
+        .showcase-arrow-next { right: 14px; }
+
+        .showcase-arrow-prev:hover { transform: translateY(-50%) translateX(-2px); }
+        .showcase-arrow-next:hover { transform: translateY(-50%) translateX(2px); }
+
+        .showcase-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--crema, #f4f1ec);
+            position: relative;
+            opacity: 0.6;
+            transition: opacity 0.3s ease, outline-color 0.3s ease;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+
+        .showcase-thumb:hover {
+            opacity: 0.9;
+        }
+
+        .showcase-thumb.active {
+            opacity: 1;
+            outline-color: var(--azul);
+        }
+
+        .showcase-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .showcase-content {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .showcase-description {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--grafito);
+            opacity: 0.85;
+        }
+
+        .showcase-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 28px;
+            padding: 18px 0;
+            border-top: 1px solid rgba(30,30,30,0.12);
+            border-bottom: 1px solid rgba(30,30,30,0.12);
+        }
+
+        .showcase-spec-label {
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--grafito);
+            opacity: 0.55;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .showcase-spec-value {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.05rem;
+            line-height: 1.3;
+            color: var(--grafito);
+        }
+
+        .showcase-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 28px;
+            background: var(--grafito);
+            color: var(--white);
+            border-radius: 99px;
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            transition: background 0.3s ease, gap 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .showcase-cta:hover {
+            background: var(--azul);
+            gap: 14px;
         }
 
         /* ═══════════════════════════════════════
@@ -494,7 +1093,7 @@
             display: block;
             filter: blur(8px) brightness(0.55);
             transform: scale(1.08);
-            transition: filter 0.6s ease, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+            transition: filter 0.3s ease, transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
         }
 
         .producto-card:hover .producto-img-wrap img {
@@ -508,7 +1107,7 @@
             inset: 0;
             background: rgba(30, 30, 30, 0.25);
             pointer-events: none;
-            transition: background 0.5s ease;
+            transition: background 0.25s ease;
         }
 
         .producto-card:hover .producto-img-wrap::after {
@@ -531,21 +1130,64 @@
             color: var(--grafito);
             opacity: 0.7;
             max-width: 320px;
+            margin-bottom: 14px;
+        }
+
+        .producto-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--azul);
+            letter-spacing: 0.01em;
+            text-decoration: none;
+            border-bottom: 1px solid var(--azul);
+            padding-bottom: 2px;
+            transition: gap 0.3s ease, color 0.3s ease;
+        }
+
+        .producto-cta:hover {
+            gap: 10px;
+            color: var(--grafito);
+            border-bottom-color: var(--grafito);
         }
 
         /* ═══════════════════════════════════════
-           CTA — NEWSLETTER AZUL
+           CTA — NEWSLETTER AZUL con BG
         ═══════════════════════════════════════ */
         .cta {
             background: var(--azul);
             color: var(--white);
             padding: 100px 6% 110px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('images/Banner-Newsletter.jpg') center/cover no-repeat;
+            z-index: -2;
+        }
+
+        .cta::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(44, 119, 218, 0.70);
+            z-index: -1;
         }
 
         .cta-inner {
             max-width: 920px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-eyebrow {
@@ -581,6 +1223,33 @@
             opacity: 0.95;
             max-width: 460px;
             margin: 0 auto 36px;
+        }
+
+        .cta-benefits {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 26px 36px;
+            margin: 0 auto 32px;
+            max-width: 720px;
+        }
+
+        .cta-benefit {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            color: var(--white);
+            opacity: 0.92;
+            letter-spacing: 0.01em;
+        }
+
+        .cta-benefit::before {
+            content: '✱';
+            display: inline-block;
+            font-size: 1rem;
+            opacity: 0.75;
         }
 
         .cta-form {
@@ -688,8 +1357,8 @@
             max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
         }
 
         .ig-item {
@@ -821,12 +1490,16 @@
             .productos-header { grid-template-columns: 1fr; gap: 16px; }
             .productos-sub { text-align: left; }
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .faq-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .faq-sub { text-align: left; }
+            .showcase-grid { grid-template-columns: 1fr; gap: 40px; }
         }
 
         @media (max-width: 768px) {
             .topbar { padding: 10px 20px; }
             .topbar-logo svg { height: 18px; }
             .topbar-link { font-size: 0.7rem; }
+            .topbar-nav { display: none; }
 
             .hero {
                 height: calc(100vh - 38px);
@@ -855,6 +1528,50 @@
 
             .proceso-media { aspect-ratio: 4 / 3; }
 
+            .faq { padding: 70px 6% 80px; }
+            .faq-title { font-size: 2.2rem; }
+            .faq-q { padding: 22px 0; font-size: 1.1rem; }
+
+            .showcase {
+                padding: 20px 6% 70px;
+                min-height: 0;
+                display: block;
+            }
+            .showcase-inner { flex: none; display: block; }
+            .showcase-grid { flex: none; min-height: 0; grid-template-columns: 1fr; gap: 30px; }
+            .showcase-media {
+                min-height: 0;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .showcase-hero {
+                flex: none;
+                aspect-ratio: 4 / 5;
+                height: auto;
+                max-height: none;
+                min-height: 0;
+                order: 1;
+            }
+            .showcase-thumbs {
+                flex-direction: row;
+                width: 100%;
+                order: 2;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .showcase-thumbs .showcase-thumb { height: auto; aspect-ratio: 1; width: 100%; }
+            .showcase-title { font-size: 2.2rem; }
+            .showcase-specs { grid-template-columns: 1fr; gap: 14px; padding: 14px 0; }
+
+            .hero-cta { font-size: 0.78rem; padding: 10px 18px; margin-top: 22px; }
+            .producto-cta { font-size: 0.78rem; }
+
+            .sticky-cta { display: flex; }
+            .scroll-indicator { display: none; }
+            .back-top { bottom: 92px; right: 20px; width: 42px; height: 42px; }
+            .cta-benefits { gap: 14px 20px; }
+            .cta-benefit { font-size: 0.8rem; }
+
             .cta { padding: 70px 6% 80px; }
             .cta-headline .line-desktop { display: none; }
             .cta-headline .line-mobile { display: block; }
@@ -864,7 +1581,7 @@
 
             .ig-feed { padding: 70px 6% 70px; }
             .ig-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-            .ig-grid { grid-template-columns: 1fr; gap: 16px; }
+            .ig-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
             footer { padding: 60px 6% 0; }
             .footer-grid { grid-template-columns: 1fr; gap: 36px; padding-bottom: 50px; }
@@ -881,6 +1598,18 @@
         </div>
     </div>
 
+    <!-- BACK TO TOP -->
+    <button class="back-top" id="backTop" aria-label="Volver arriba">↑</button>
+
+    <!-- STICKY MOBILE CTA -->
+    <div class="sticky-cta" id="stickyCta">
+        <div class="sticky-cta-text">
+            Se viene Grandanés.
+            <small>Avisanos por mail y te enteramos antes.</small>
+        </div>
+        <a href="#newsletter" class="sticky-cta-btn">Sumate</a>
+    </div>
+
 
     <!-- TOP BAR (azul) -->
     <div class="topbar">
@@ -891,6 +1620,13 @@
                 <path d="M0,260.13C0,96.37,94.92,0,249.26,0c131.87,0,203.61,71.01,218.1,181.15h-137.67c-6.52-45.65-34.78-68.84-80.43-68.84-65.21,0-99.27,50.72-99.27,147.09v9.42c0,87.68,38.4,134.05,103.61,134.05,46.37,0,82.6-24.63,86.23-70.29h-78.98v-91.3h210.85v249.98h-129.7v-57.96c-22.46,40.57-65.21,68.83-131.15,68.83C82.6,502.13,0,405.05,0,260.13Z"/>
             </svg>
         </a>
+        <nav class="topbar-nav" id="topNav">
+            <a href="#productos">Productos</a>
+            <a href="#sobre">Nosotros</a>
+            <a href="#faq">FAQ</a>
+            <a href="#newsletter">Newsletter</a>
+        </nav>
+
         <div class="topbar-right">
             <a href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener" class="topbar-link">@grandanes.studio</a>
         </div>
@@ -901,9 +1637,17 @@
         <img src="images/Hero-Web-NEW.jpg" alt="Cama Sentado de grandanés" class="hero-img">
 
         <div class="hero-text">
-            Está llegando el mueble<br>
+            <span class="hero-text-headline">Está llegando el mueble<br>
             para <span class="highlight">quien manda</span> en la<br>
-            casa.
+            casa.</span>
+            <div class="hero-text-cta-wrap">
+                <a href="#newsletter" class="hero-cta">Sumate al lanzamiento <span class="hero-cta-arrow">↓</span></a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="scroll-indicator-label">Scroll</span>
+            <div class="scroll-indicator-line"></div>
         </div>
 
         <div class="hero-wordmark">
@@ -921,53 +1665,74 @@
         </div>
     </section>
 
-    <!-- MANIFIESTO -->
-    <section class="manifiesto">
-        <div class="manifiesto-inner">
-            <div>
-                <div class="manifiesto-eyebrow reveal">Córdoba, Argentina.</div>
-                <h2 class="manifiesto-headline reveal d1">
-                    Diseñamos<br>
-                    para ellos.
-                </h2>
-                <div class="manifiesto-text reveal d2">
-                    <p>Somos un estudio de diseño para mascotas.</p>
-                    <p>Hacemos cosas que nos gustan, con materiales que aguantan, para los que mandan de verdad en la casa.</p>
+    <!-- PRODUCTOS -->
+    <section class="productos" id="productos">
+        <div class="productos-header">
+            <h2 class="productos-title reveal">Tienda Online, próximamente.</h2>
+            <p class="productos-sub reveal d1">Tres muebles de diseño. Como los que te gustan a vos, pero para el que realmente manda. Muy pronto disponibles en nuestra tienda online.</p>
+        </div>
+
+        <div class="productos-grid">
+            <div class="producto-card reveal d1" data-product="cesca">
+                <div class="producto-img-wrap">
+                    <img src="images/CamaCesca.jpg" alt="Cama Cesca">
                 </div>
-                <div class="manifiesto-sticker reveal d3">
-                    <img src="images/Sticker-Web-NEW02.svg" alt="quien manda en la casa.">
-                </div>
+                <div class="producto-name">Cama Cesca</div>
+                <p class="producto-desc">Cama tipo ménsula, hecha de acero tubular cromado curvado.</p>
+                <span class="producto-cta">Ver detalles <span>↓</span></span>
             </div>
-            <div class="manifiesto-photo reveal d2">
-                <img src="images/Banner02-Web-NEW.jpg" alt="Bulldog francés en cama Sentado">
+
+            <div class="producto-card reveal d2" data-product="vetra">
+                <div class="producto-img-wrap">
+                    <img src="images/Vetra.jpg" alt="Cama Vetra">
+                </div>
+                <div class="producto-name">Cama Vetra</div>
+                <p class="producto-desc">Fenólico de alta calidad, insertos roscados y almohadón anti-desgarro.</p>
+                <span class="producto-cta">Ver detalles <span>↓</span></span>
+            </div>
+
+            <div class="producto-card reveal d3" data-product="modulo">
+                <div class="producto-img-wrap">
+                    <img src="images/CamaMódulo.jpg" alt="Cama Módulo">
+                </div>
+                <div class="producto-name">Cama Módulo</div>
+                <p class="producto-desc">Estructura en chapa plegada, pintura epoxi/laqueada, y almohadón de eco-cuero.</p>
+                <span class="producto-cta">Ver detalles <span>↓</span></span>
             </div>
         </div>
     </section>
 
-    <!-- HISTORIA / EQUIPO -->
-    <section class="historia" id="historia">
-        <div class="historia-header">
-            <div>
-                <div class="historia-eyebrow reveal">/ La historia</div>
-                <h2 class="historia-title reveal d1">Empezó con un perro<br>y una cama incómoda.</h2>
-            </div>
-            <div class="historia-text reveal d2">
-                <p>Grandanés nació en Córdoba, mirando a nuestros perros buscando dónde dormir y dándonos cuenta de que el diseño de muebles para mascotas era mediocre.</p>
-                <p>Así que decidimos hacerlo nosotros.</p>
-            </div>
-        </div>
+    <!-- SHOWCASE — producto destacado -->
+    <section class="showcase" id="showcase">
+        <div class="showcase-inner" id="showcaseInner">
+            <div class="showcase-eyebrow" id="showcaseEyebrow">/ Modelo destacado</div>
+            <h2 class="showcase-title" id="showcaseTitle">Cama Cesca</h2>
+            <p class="showcase-tagline" id="showcaseTagline">Líneas curvas, alma cromada.</p>
 
-        <div class="historia-media reveal d2">
-            <img src="images/AboutUs.jpg" alt="Historia grandanés">
-        </div>
-    </section>
+            <div class="showcase-grid">
+                <div class="showcase-media">
+                    <div class="showcase-thumbs" id="showcaseThumbs">
+                        <!-- thumbnails se inyectan via JS -->
+                    </div>
+                    <div class="showcase-hero">
+                        <button class="showcase-arrow showcase-arrow-prev" id="showcasePrev" aria-label="Imagen anterior">‹</button>
+                        <img src="images/CamaCesca.jpg" alt="Cama Cesca" id="showcaseHero">
+                        <button class="showcase-arrow showcase-arrow-next" id="showcaseNext" aria-label="Imagen siguiente">›</button>
+                    </div>
+                </div>
 
-    <!-- PROCESO — video full-width -->
-    <section class="proceso" id="proceso">
-        <div class="proceso-media">
-            <video autoplay muted loop playsinline poster="images/Hero-Web-NEW.jpg">
-                <source src="images/LoopProceso.mp4" type="video/mp4">
-            </video>
+                <div class="showcase-content">
+                    <p class="showcase-description" id="showcaseDescription">
+                        La Cesca toma la elegancia del cantilever clásico y la lleva al hogar de tu mascota. Acero tubular cromado curvado a mano, terminación espejo, con almohadón removible en cordura negra.
+                    </p>
+
+                    <div class="showcase-specs" id="showcaseSpecs">
+                        <!-- specs se inyectan via JS -->
+                    </div>
+
+                    <a href="#newsletter" class="showcase-cta">Avisame cuando salga <span>→</span></a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -985,36 +1750,107 @@
         </div>
     </div>
 
-    <!-- PRODUCTOS -->
-    <section class="productos" id="productos">
-        <div class="productos-header">
-            <h2 class="productos-title reveal">Tienda Online, próximamente.</h2>
-            <p class="productos-sub reveal d1">Tres muebles de diseño. Como los que te gustan a vos, pero para el que realmente manda. Muy pronto disponibles en nuestra tienda online.</p>
+    <!-- SOBRE GRANDANÉS (combina Manifiesto + Historia) -->
+    <section class="historia" id="sobre">
+        <div class="historia-header">
+            <div>
+                <div class="historia-eyebrow reveal">/ Sobre Grandanés</div>
+                <h2 class="historia-title reveal d1">Diseñamos<br>para ellos.</h2>
+                <div class="historia-sticker reveal d3">
+                    <img src="images/Sticker-Web-NEW02.svg" alt="quien manda en la casa.">
+                </div>
+            </div>
+            <div class="historia-text reveal d2">
+                <p><strong>Empezó con un perro y una cama incómoda.</strong></p>
+                <p>Grandanés nació en Córdoba, mirando a nuestros perros buscando dónde dormir y dándonos cuenta de que el diseño de muebles para mascotas era mediocre.</p>
+                <p>Así que decidimos hacerlo nosotros. Somos un estudio de diseño para mascotas. Punto.</p>
+                <p>Hacemos cosas que nos gustan, con materiales que aguantan, para los que mandan de verdad en la casa.</p>
+            </div>
         </div>
 
-        <div class="productos-grid">
-            <div class="producto-card reveal d1">
-                <div class="producto-img-wrap">
-                    <img src="images/CamaCesca.jpg" alt="Cama Cesca">
-                </div>
-                <div class="producto-name">Cama Cesca</div>
-                <p class="producto-desc">Cama tipo ménsula, hecha de acero tubular cromado curvado.</p>
+        <div class="historia-media reveal d2">
+            <img src="images/AboutUs.jpg" alt="Equipo Grandanés">
+        </div>
+    </section>
+
+    <!-- PROCESO — video full-width -->
+    <section class="proceso" id="proceso">
+        <div class="proceso-media">
+            <video autoplay muted loop playsinline poster="images/Hero-Web-NEW.jpg">
+                <source src="images/LoopProceso.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="faq-header">
+            <div>
+                <div class="faq-eyebrow reveal">/ Preguntas frecuentes</div>
+                <h2 class="faq-title reveal d1">Antes de que preguntes.</h2>
+            </div>
+            <p class="faq-sub reveal d2">Lo más común que nos preguntan. Si te queda algo en el aire, escribinos.</p>
+        </div>
+
+        <div class="faq-list reveal d1">
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span>¿Cuándo abre la tienda?</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    Pronto. Estamos terminando de cerrar los detalles para lanzar la tienda online en TiendaNube. Sumate al newsletter abajo y te avisamos antes que nadie.
+                </div></div>
             </div>
 
-            <div class="producto-card reveal d2">
-                <div class="producto-img-wrap">
-                    <img src="images/Vetra.jpg" alt="Cama Vetra">
-                </div>
-                <div class="producto-name">Cama Vetra</div>
-                <p class="producto-desc">Fenólico de alta calidad, insertos roscados y almohadón anti-desgarro.</p>
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span>¿Cuánto van a costar las camas?</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    Cada cama tiene su precio según materiales y mano de obra. Vas a tener el detalle completo al lanzamiento. Quienes estén en el newsletter reciben el precio antes que nadie y con descuento de pre-lanzamiento.
+                </div></div>
             </div>
 
-            <div class="producto-card reveal d3">
-                <div class="producto-img-wrap">
-                    <img src="images/CamaMódulo.jpg" alt="Cama Módulo">
-                </div>
-                <div class="producto-name">Cama Módulo</div>
-                <p class="producto-desc">Estructura en chapa plegada, pintura epoxi/laqueada, y almohadón de eco-cuero.</p>
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span>¿Hacen envíos a todo el país?</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    Sí. Despachamos desde Córdoba a toda Argentina. Envíos internacionales: en proceso.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span>¿Qué tamaños de mascota soportan?</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    La primera tanda está pensada para mascotas de hasta 25 kg. Para razas más grandes, estamos cocinando una línea aparte.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span>¿Tienen garantía?</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    Sí. 1 año de garantía contra defectos de fabricación. Si algo no aguanta lo que tiene que aguantar, lo solucionamos.
+                </div></div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">
+                    <span>¿Cómo se cuidan los materiales?</span>
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    Cada pieza viene con su instructivo de cuidado. Trabajamos con materiales nobles y fáciles de limpiar — pensados para aguantar el uso real, no solo la foto.
+                </div></div>
             </div>
         </div>
     </section>
@@ -1024,7 +1860,14 @@
         <div class="cta-inner">
             <div class="cta-eyebrow reveal">Se viene el lanzamiento</div>
             <h2 class="cta-headline reveal d1"><span class="line-desktop">Tu mascota tiene que ser</span><span class="line-desktop">la primera en saberlo.</span><span class="line-mobile">Tu mascota tiene</span><span class="line-mobile">que ser la</span><span class="line-mobile">primera en saberlo.</span></h2>
-            <p class="cta-text reveal d2">Dejanos tu mail y te avisamos apenas abramos la tienda. Sin spam, sin ruido.</p>
+            <p class="cta-text reveal d2">Dejanos tu mail y te avisamos apenas abramos la tienda.</p>
+
+            <div class="cta-benefits reveal d2">
+                <span class="cta-benefit">Acceso anticipado</span>
+                <span class="cta-benefit">Descuento de lanzamiento</span>
+                <span class="cta-benefit">Updates exclusivos</span>
+            </div>
+
             <form class="cta-form reveal d2" id="newsletterForm">
                 <input type="email" placeholder="tu@email.com" required>
                 <button type="submit">Avisame</button>
@@ -1051,6 +1894,15 @@
             </a>
             <a class="ig-item reveal d3" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
                 <img src="images/Post03-NEW.jpg" alt="Está llegando el mueble" loading="lazy">
+            </a>
+            <a class="ig-item reveal d1" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
+                <img src="images/01.jpg" alt="grandanés studio" loading="lazy">
+            </a>
+            <a class="ig-item reveal d2" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
+                <img src="images/02.jpg" alt="grandanés studio" loading="lazy">
+            </a>
+            <a class="ig-item reveal d3" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
+                <img src="images/03.jpg" alt="grandanés studio" loading="lazy">
             </a>
         </div>
     </section>
@@ -1174,6 +2026,276 @@
                     e.preventDefault();
                     const top = target.getBoundingClientRect().top + window.scrollY - 60;
                     window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        /* BACK TO TOP — visible al pasar 600px de scroll */
+        (function backTopInit() {
+            const btn = document.getElementById('backTop');
+            if (!btn) return;
+
+            function update() {
+                if (window.scrollY > 600) btn.classList.add('visible');
+                else btn.classList.remove('visible');
+            }
+
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        })();
+
+        /* ACTIVE NAV — resalta la sección visible */
+        (function activeNavInit() {
+            const navLinks = document.querySelectorAll('.topbar-nav a');
+            if (!navLinks.length) return;
+
+            const sections = Array.from(navLinks)
+                .map(a => {
+                    const id = a.getAttribute('href').slice(1);
+                    return { link: a, section: document.getElementById(id) };
+                })
+                .filter(s => s.section);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(a => a.classList.remove('active'));
+                        const match = sections.find(s => s.section === entry.target);
+                        if (match) match.link.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+            sections.forEach(s => observer.observe(s.section));
+        })();
+
+        /* STICKY MOBILE CTA — visible al pasar el hero, oculta cerca del newsletter/footer */
+        (function stickyCtaInit() {
+            const stickyCta = document.getElementById('stickyCta');
+            const hero = document.querySelector('.hero');
+            const newsletter = document.getElementById('newsletter');
+
+            if (!stickyCta || !hero) return;
+
+            function updateSticky() {
+                if (window.innerWidth > 768) {
+                    stickyCta.classList.remove('visible');
+                    return;
+                }
+
+                const scrollY = window.scrollY;
+                const heroBottom = hero.offsetTop + hero.offsetHeight;
+                const newsletterTop = newsletter ? newsletter.offsetTop - 100 : Infinity;
+                const newsletterBottom = newsletter ? newsletter.offsetTop + newsletter.offsetHeight + 200 : Infinity;
+
+                // Mostrar después del hero, ocultar al llegar a la sección de newsletter
+                if (scrollY > heroBottom * 0.6 && (scrollY < newsletterTop || scrollY > newsletterBottom)) {
+                    stickyCta.classList.add('visible');
+                } else {
+                    stickyCta.classList.remove('visible');
+                }
+            }
+
+            window.addEventListener('scroll', updateSticky, { passive: true });
+            window.addEventListener('resize', updateSticky);
+            updateSticky();
+        })();
+
+        /* SHOWCASE — producto destacado interactivo */
+        (function showcaseInit() {
+            const products = {
+                cesca: {
+                    name: 'Cama Cesca',
+                    tagline: 'Líneas curvas, alma cromada.',
+                    description: 'La Cesca toma la elegancia del cantilever clásico y la lleva al hogar de tu mascota. Acero tubular cromado curvado a mano, terminación espejo, con almohadón removible en cordura negra.',
+                    hero: 'images/CamaCesca.jpg',
+                    thumbs: [
+                        'images/CamaCesca.jpg',
+                        'images/Banner02-Web-NEW.jpg',
+                        'images/aluminio.jpg',
+                        'images/Tela.jpg'
+                    ],
+                    specs: [
+                        { label: 'Estructura', value: 'Acero tubular cromado' },
+                        { label: 'Almohadón', value: 'Cordura negra' },
+                        { label: 'Dimensiones', value: '50 × 35 × 18 cm' },
+                        { label: 'Mascotas hasta', value: '15 kg' }
+                    ]
+                },
+                vetra: {
+                    name: 'Cama Vetra',
+                    tagline: 'Fenólico premium con almohadón anti-desgarro.',
+                    description: 'Base de fenólico de alta calidad sobre patas con insertos roscados. Almohadón con tela técnica anti-desgarro, pensada para resistir uñas, pelo y tiempo.',
+                    hero: 'images/Vetra.jpg',
+                    thumbs: [
+                        'images/Vetra.jpg',
+                        'images/Hero-Web-NEW.jpg',
+                        'images/Fenolico.webp',
+                        'images/Tela.jpg'
+                    ],
+                    specs: [
+                        { label: 'Estructura', value: 'Fenólico premium' },
+                        { label: 'Almohadón', value: 'Tela anti-desgarro' },
+                        { label: 'Dimensiones', value: '60 × 40 × 12 cm' },
+                        { label: 'Mascotas hasta', value: '25 kg' }
+                    ]
+                },
+                modulo: {
+                    name: 'Cama Módulo',
+                    tagline: 'Chapa plegada con almohadón de eco-cuero.',
+                    description: 'Estructura en chapa plegada con terminación epoxi o laqueada. Almohadón en eco-cuero de alta resistencia, fácil de limpiar y con carácter.',
+                    hero: 'images/CamaMódulo.jpg',
+                    thumbs: [
+                        'images/CamaMódulo.jpg',
+                        'images/Post03-NEW.jpg',
+                        'images/aluminio.jpg',
+                        'images/Etiqueta.jpg'
+                    ],
+                    specs: [
+                        { label: 'Estructura', value: 'Chapa plegada · Epoxi' },
+                        { label: 'Almohadón', value: 'Eco-cuero alta resistencia' },
+                        { label: 'Dimensiones', value: '70 × 45 × 15 cm' },
+                        { label: 'Mascotas hasta', value: '20 kg' }
+                    ]
+                }
+            };
+
+            const inner = document.getElementById('showcaseInner');
+            const titleEl = document.getElementById('showcaseTitle');
+            const taglineEl = document.getElementById('showcaseTagline');
+            const descEl = document.getElementById('showcaseDescription');
+            const heroEl = document.getElementById('showcaseHero');
+            const thumbsEl = document.getElementById('showcaseThumbs');
+            const specsEl = document.getElementById('showcaseSpecs');
+            const prevBtn = document.getElementById('showcasePrev');
+            const nextBtn = document.getElementById('showcaseNext');
+            const cards = document.querySelectorAll('.producto-card[data-product]');
+
+            if (!inner) return;
+
+            // Estado actual
+            let currentThumbs = [];
+            let currentIndex = 0;
+
+            function setActiveThumb(i) {
+                heroEl.style.opacity = '0';
+                setTimeout(() => {
+                    heroEl.src = currentThumbs[i];
+                    heroEl.style.opacity = '1';
+                }, 180);
+                currentIndex = i;
+                thumbsEl.querySelectorAll('.showcase-thumb').forEach((x, idx) => {
+                    x.classList.toggle('active', idx === i);
+                });
+            }
+
+            function navigate(direction) {
+                if (!currentThumbs.length) return;
+                const next = (currentIndex + direction + currentThumbs.length) % currentThumbs.length;
+                setActiveThumb(next);
+            }
+
+            function renderThumbs(thumbs, activeIndex = 0) {
+                currentThumbs = thumbs;
+                currentIndex = activeIndex;
+                thumbsEl.innerHTML = thumbs.map((src, i) => `
+                    <div class="showcase-thumb ${i === activeIndex ? 'active' : ''}" data-thumb-index="${i}">
+                        <img src="${src}" alt="Vista ${i + 1}">
+                    </div>
+                `).join('');
+
+                thumbsEl.querySelectorAll('.showcase-thumb').forEach(t => {
+                    t.addEventListener('click', () => {
+                        const i = parseInt(t.dataset.thumbIndex, 10);
+                        setActiveThumb(i);
+                    });
+                });
+            }
+
+            function renderSpecs(specs) {
+                specsEl.innerHTML = specs.map(s => `
+                    <div>
+                        <span class="showcase-spec-label">${s.label}</span>
+                        <div class="showcase-spec-value">${s.value}</div>
+                    </div>
+                `).join('');
+            }
+
+            function updateShowcase(key) {
+                const p = products[key];
+                if (!p) return;
+
+                inner.classList.add('fading');
+
+                setTimeout(() => {
+                    titleEl.textContent = p.name;
+                    taglineEl.textContent = p.tagline;
+                    descEl.textContent = p.description;
+                    heroEl.src = p.hero;
+                    renderThumbs(p.thumbs, 0);
+                    renderSpecs(p.specs);
+                    inner.classList.remove('fading');
+                }, 250);
+
+                cards.forEach(c => {
+                    c.classList.toggle('selected', c.dataset.product === key);
+                });
+            }
+
+            // Estado inicial
+            renderThumbs(products.cesca.thumbs, 0);
+            renderSpecs(products.cesca.specs);
+            cards[0]?.classList.add('selected');
+
+            // Click handlers en cards
+            cards.forEach(card => {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', () => {
+                    const key = card.dataset.product;
+                    updateShowcase(key);
+
+                    // Scroll suave al showcase
+                    const showcase = document.getElementById('showcase');
+                    if (showcase) {
+                        const top = showcase.getBoundingClientRect().top + window.scrollY - 30;
+                        window.scrollTo({ top, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Flechas de navegación
+            prevBtn?.addEventListener('click', () => navigate(-1));
+            nextBtn?.addEventListener('click', () => navigate(1));
+
+            // Teclado: ←/→ navegan
+            document.addEventListener('keydown', (e) => {
+                const showcase = document.getElementById('showcase');
+                if (!showcase) return;
+                const rect = showcase.getBoundingClientRect();
+                const inView = rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3;
+                if (!inView) return;
+                if (e.key === 'ArrowLeft') navigate(-1);
+                if (e.key === 'ArrowRight') navigate(1);
+            });
+        })();
+
+        /* FAQ ACCORDION */
+        document.querySelectorAll('.faq-q').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const answer = item.querySelector('.faq-a');
+                const isOpen = item.classList.contains('open');
+
+                if (isOpen) {
+                    answer.style.maxHeight = '0';
+                    item.classList.remove('open');
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    item.classList.add('open');
                 }
             });
         });
