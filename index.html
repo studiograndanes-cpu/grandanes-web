@@ -1277,6 +1277,15 @@
             color: rgba(30,30,30,0.5);
         }
 
+        .cta-form .input--hidden {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .cta-form button {
             background: var(--grafito);
             color: var(--white);
@@ -1860,8 +1869,12 @@
                 <span class="cta-benefit">Updates exclusivos</span>
             </div>
 
-            <form class="cta-form reveal d2" id="newsletterForm">
-                <input type="email" placeholder="tu@email.com" required>
+            <form class="cta-form reveal d2" id="newsletterForm"
+                  action="https://0cb65f87.sibforms.com/serve/MUIFAMU0iDPPugF82LmDzHzXid24c75jLWbUtbigwrFD7xKvvX_lf51flyvxMuwNWw0YjW69tAjVVSD5KcpQZea-cLl4nE7SkZik8_FuORh2MCeHxMQNPQ97Q2Ojk1O5A0yLBR_tIb3q3LrmnCYCzyNAqBFDA5JmxVNUZK3BBhIWTTOgd4yFGgARd7S0HUniJWM6HJO7AA3X2Mhtng=="
+                  method="POST" data-type="subscription">
+                <input type="email" name="EMAIL" placeholder="tu@email.com" autocomplete="email" required>
+                <input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+                <input type="hidden" name="locale" value="es">
                 <button type="submit">Avisame</button>
             </form>
             <div class="cta-msg" id="ctaMsg"></div>
@@ -2289,20 +2302,40 @@
             });
         });
 
-        /* NEWSLETTER FORM (mailto) */
-        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+        /* NEWSLETTER FORM (Brevo) */
+        document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = e.target.querySelector('input').value.trim();
+            const form = e.target;
+            const emailInput = form.querySelector('input[name="EMAIL"]');
+            const honeypot = form.querySelector('input[name="email_address_check"]');
+            const button = form.querySelector('button');
             const msg = document.getElementById('ctaMsg');
+            const email = emailInput.value.trim();
+
             if (!email) return;
+            if (honeypot && honeypot.value) return; // bot detection
 
-            const subject = encodeURIComponent('Sumame al newsletter');
-            const body = encodeURIComponent(`Hola, quiero estar al tanto del lanzamiento.\n\nMail: ${email}\n\n¡Gracias!`);
-            window.location.href = `mailto:studiograndanes@gmail.com?subject=${subject}&body=${body}`;
+            const originalLabel = button.textContent;
+            button.disabled = true;
+            button.textContent = 'Enviando…';
+            msg.textContent = '';
 
-            msg.textContent = 'Listo. Abrimos tu cliente de email — mandanos el mail y te sumamos.';
-            e.target.querySelector('input').value = '';
-            setTimeout(() => { msg.textContent = ''; }, 6000);
+            try {
+                const formData = new FormData(form);
+                await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+                msg.textContent = '¡Listo! Te avisamos apenas abramos. Revisá tu email.';
+                emailInput.value = '';
+            } catch (err) {
+                msg.textContent = 'Hubo un error. Escribinos a studiograndanes@gmail.com.';
+            } finally {
+                button.disabled = false;
+                button.textContent = originalLabel;
+                setTimeout(() => { msg.textContent = ''; }, 8000);
+            }
         });
     </script>
 
