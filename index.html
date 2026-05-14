@@ -767,14 +767,11 @@
         }
 
         /* ═══════════════════════════════════════
-           SHOWCASE — Producto destacado (fit viewport)
+           SHOWCASE — Producto destacado (visor 4:5)
         ═══════════════════════════════════════ */
         .showcase {
             background: var(--white);
-            padding: 24px 6%;
-            min-height: calc(100vh - 46px);
-            display: flex;
-            flex-direction: column;
+            padding: 50px 6% 80px;
             box-sizing: border-box;
         }
 
@@ -784,10 +781,6 @@
             opacity: 1;
             transition: opacity 0.4s ease;
             width: 100%;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-height: 0;
         }
 
         .showcase-inner.fading {
@@ -825,10 +818,8 @@
         .showcase-grid {
             display: grid;
             grid-template-columns: 1.1fr 1fr;
-            gap: 32px;
+            gap: 40px;
             align-items: start;
-            flex: 1;
-            min-height: 0;
         }
 
         .showcase-media {
@@ -858,7 +849,7 @@
             position: relative;
             flex: 1;
             min-width: 0;
-            height: clamp(360px, 58vh, 600px);
+            aspect-ratio: 4 / 5;
         }
 
         .showcase-hero img {
@@ -1756,17 +1747,17 @@
     <section class="historia" id="sobre">
         <div class="historia-header">
             <div>
-                <div class="historia-eyebrow reveal">/ Sobre Grandanés</div>
+                <div class="historia-eyebrow reveal">/ Nosotros</div>
                 <h2 class="historia-title reveal d1">Diseñamos<br>para ellos.</h2>
                 <div class="historia-sticker reveal d3">
                     <img src="images/Sticker-Web-NEW02.svg" alt="quien manda en la casa.">
                 </div>
             </div>
             <div class="historia-text reveal d2">
-                <p><strong>Empezó con un perro y una cama incómoda.</strong></p>
-                <p>Grandanés nació en Córdoba, mirando a nuestros perros buscando dónde dormir y dándonos cuenta de que el diseño de muebles para mascotas era mediocre.</p>
-                <p>Así que decidimos hacerlo nosotros. Somos un estudio de diseño para mascotas. Punto.</p>
-                <p>Hacemos cosas que nos gustan, con materiales que aguantan, para los que mandan de verdad en la casa.</p>
+                <p><strong>Estudio de diseño para mascotas.</strong></p>
+                <p>Grandanés nació en Córdoba, cuando descubrimos que no existían productos de diseño dedicados a los que más amamos, nuestros perros.</p>
+                <p>Así que decidimos hacerlo nosotros.</p>
+                <p>Diseñamos cosas que nos gustan, con materiales que aguantan, para los que mandan de verdad en la casa.</p>
             </div>
         </div>
 
@@ -1789,7 +1780,7 @@
         <div class="faq-header">
             <div>
                 <div class="faq-eyebrow reveal">/ Preguntas frecuentes</div>
-                <h2 class="faq-title reveal d1">Antes de que preguntes.</h2>
+                <h2 class="faq-title reveal d1">Lo que todos quieren saber.</h2>
             </div>
             <p class="faq-sub reveal d2">Lo más común que nos preguntan. Si te queda algo en el aire, escribinos.</p>
         </div>
@@ -1801,7 +1792,7 @@
                     <span class="faq-toggle">+</span>
                 </button>
                 <div class="faq-a"><div class="faq-a-inner">
-                    Pronto. Estamos terminando de cerrar los detalles para lanzar la tienda online en TiendaNube. Sumate al newsletter abajo y te avisamos antes que nadie.
+                    Pronto. Estamos terminando de cerrar los detalles para lanzar la tienda online. Sumate al newsletter abajo y te avisamos antes que nadie.
                 </div></div>
             </div>
 
@@ -1821,7 +1812,7 @@
                     <span class="faq-toggle">+</span>
                 </button>
                 <div class="faq-a"><div class="faq-a-inner">
-                    Sí. Despachamos desde Córdoba a toda Argentina. Envíos internacionales: en proceso.
+                    Sí. Despachamos desde Córdoba a toda Argentina.
                 </div></div>
             </div>
 
@@ -1831,7 +1822,7 @@
                     <span class="faq-toggle">+</span>
                 </button>
                 <div class="faq-a"><div class="faq-a-inner">
-                    La primera tanda está pensada para mascotas de hasta 25 kg. Para razas más grandes, estamos cocinando una línea aparte.
+                    La primera tanda está pensada para mascotas de hasta 25 kg. Próximamente más modelos.
                 </div></div>
             </div>
 
@@ -1851,7 +1842,7 @@
                     <span class="faq-toggle">+</span>
                 </button>
                 <div class="faq-a"><div class="faq-a-inner">
-                    Cada pieza viene con su instructivo de cuidado. Trabajamos con materiales nobles y fáciles de limpiar — pensados para aguantar el uso real, no solo la foto.
+                    Cada pieza viene con su instructivo de cuidado. Trabajamos con materiales nobles y fáciles de limpiar. Pensados para aguantar el uso real.
                 </div></div>
             </div>
         </div>
@@ -1889,22 +1880,22 @@
         </div>
         <div class="ig-grid">
             <a class="ig-item reveal d1" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
-                <img src="images/Post01-NEW.jpg" alt="Grandanés - Diseñamos para ellos." loading="lazy">
+                <img src="images/Miniatura-IG-01.jpg" alt="grandanés studio" loading="lazy">
             </a>
             <a class="ig-item reveal d2" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
-                <img src="images/Post02-NEW.jpg" alt="Sticker Gran-Danés Design Studio" loading="lazy">
+                <img src="images/Miniatura-IG-02.jpg" alt="grandanés studio" loading="lazy">
             </a>
             <a class="ig-item reveal d3" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
-                <img src="images/Post03-NEW.jpg" alt="Está llegando el mueble" loading="lazy">
+                <img src="images/Miniatura-IG-03.jpg" alt="grandanés studio" loading="lazy">
             </a>
             <a class="ig-item reveal d1" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
-                <img src="images/01.jpg" alt="grandanés studio" loading="lazy">
+                <img src="images/Miniatura-IG-04.jpg" alt="grandanés studio" loading="lazy">
             </a>
             <a class="ig-item reveal d2" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
-                <img src="images/02.jpg" alt="grandanés studio" loading="lazy">
+                <img src="images/Miniatura-IG-05.jpg" alt="grandanés studio" loading="lazy">
             </a>
             <a class="ig-item reveal d3" href="https://instagram.com/grandanes.studio" target="_blank" rel="noopener">
-                <img src="images/03.jpg" alt="grandanés studio" loading="lazy">
+                <img src="images/Miniatura-IG-06.jpg" alt="grandanés studio" loading="lazy">
             </a>
         </div>
     </section>
@@ -2112,8 +2103,8 @@
             const products = {
                 cesca: {
                     name: 'Cama Cesca',
-                    tagline: 'Líneas curvas, alma cromada.',
-                    description: 'La Cesca toma la elegancia del cantilever clásico y la lleva al hogar de tu mascota. Acero tubular cromado curvado a mano, terminación espejo, con almohadón removible en cordura negra.',
+                    tagline: 'Cama tipo ménsula, hecha de acero tubular cromado curvado.',
+                    description: 'Cama estilo cantilever clásico. Acero tubular cromado curvado, con almohadón removible en cordura negra.',
                     hero: 'images/CamaCesca.jpg',
                     thumbs: [
                         'images/CamaCesca.jpg',
@@ -2147,7 +2138,7 @@
                 modulo: {
                     name: 'Cama Módulo',
                     tagline: 'Chapa plegada con almohadón de eco-cuero.',
-                    description: 'Estructura en chapa plegada con terminación epoxi o laqueada. Almohadón en eco-cuero de alta resistencia, fácil de limpiar y con carácter.',
+                    description: 'Estructura en chapa plegada con terminación epoxi o laqueada. Almohadón en eco-cuero de alta resistencia y fácil de limpiar.',
                     hero: 'images/CamaMódulo.jpg',
                     thumbs: [
                         'images/CamaMódulo.jpg',
