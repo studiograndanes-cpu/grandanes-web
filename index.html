@@ -826,7 +826,7 @@
             display: grid;
             grid-template-columns: 1.1fr 1fr;
             gap: 32px;
-            align-items: stretch;
+            align-items: start;
             flex: 1;
             min-height: 0;
         }
@@ -835,7 +835,7 @@
             display: flex;
             flex-direction: row;
             gap: 10px;
-            min-height: 0;
+            align-items: flex-start;
         }
 
         .showcase-thumbs {
@@ -857,11 +857,13 @@
             background: var(--crema, #f4f1ec);
             position: relative;
             flex: 1;
-            min-height: 0;
             min-width: 0;
+            height: clamp(360px, 58vh, 600px);
         }
 
         .showcase-hero img {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -1557,7 +1559,7 @@
                 width: 100%;
                 order: 2;
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
             .showcase-thumbs .showcase-thumb { height: auto; aspect-ratio: 1; width: 100%; }
             .showcase-title { font-size: 2.2rem; }
@@ -2115,9 +2117,8 @@
                     hero: 'images/CamaCesca.jpg',
                     thumbs: [
                         'images/CamaCesca.jpg',
-                        'images/Banner02-Web-NEW.jpg',
-                        'images/aluminio.jpg',
-                        'images/Tela.jpg'
+                        'images/Cesca02.jpg',
+                        'images/Cesca03.jpg'
                     ],
                     specs: [
                         { label: 'Estructura', value: 'Acero tubular cromado' },
@@ -2133,9 +2134,8 @@
                     hero: 'images/Vetra.jpg',
                     thumbs: [
                         'images/Vetra.jpg',
-                        'images/Hero-Web-NEW.jpg',
-                        'images/Fenolico.webp',
-                        'images/Tela.jpg'
+                        'images/Vetra02.jpg',
+                        'images/Vetra03.png'
                     ],
                     specs: [
                         { label: 'Estructura', value: 'Fenólico premium' },
@@ -2151,9 +2151,8 @@
                     hero: 'images/CamaMódulo.jpg',
                     thumbs: [
                         'images/CamaMódulo.jpg',
-                        'images/Post03-NEW.jpg',
-                        'images/aluminio.jpg',
-                        'images/Etiqueta.jpg'
+                        'images/Modulo02.png',
+                        'images/Modulo03.png'
                     ],
                     specs: [
                         { label: 'Estructura', value: 'Chapa plegada · Epoxi' },
