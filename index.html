@@ -1522,8 +1522,36 @@
 
             .ticker-item { font-size: 1.6rem; }
 
-            .productos { padding: 70px 6% 70px; }
-            .productos-grid { grid-template-columns: 1fr; gap: 30px; }
+            .productos { padding: 70px 6% 0; }
+            .productos-header { margin-bottom: 24px; }
+            .productos-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            .producto-card { text-align: center; }
+            .producto-img-wrap {
+                aspect-ratio: 4 / 5;
+                margin-bottom: 10px;
+            }
+            .producto-img-wrap img {
+                filter: none;
+                transform: none;
+            }
+            .producto-img-wrap::after {
+                display: none;
+            }
+            .producto-name {
+                font-size: 0.9rem;
+                margin-bottom: 0;
+                letter-spacing: -0.01em;
+            }
+            .producto-desc,
+            .producto-cta {
+                display: none;
+            }
+            .producto-card.selected .producto-img-wrap {
+                outline-offset: 2px;
+            }
 
             .historia { padding: 80px 6% 80px; }
             .historia-title { font-size: 2.4rem; }
@@ -1549,6 +1577,7 @@
             }
             .showcase-hero {
                 flex: none;
+                width: 100%;
                 aspect-ratio: 4 / 5;
                 height: auto;
                 max-height: none;
@@ -2260,10 +2289,12 @@
                     const key = card.dataset.product;
                     updateShowcase(key);
 
-                    // Scroll suave al showcase
+                    // Scroll suave al showcase (más cerca en mobile)
                     const showcase = document.getElementById('showcase');
                     if (showcase) {
-                        const top = showcase.getBoundingClientRect().top + window.scrollY - 30;
+                        const isMobile = window.innerWidth <= 768;
+                        const offset = isMobile ? -10 : 30;
+                        const top = showcase.getBoundingClientRect().top + window.scrollY - offset;
                         window.scrollTo({ top, behavior: 'smooth' });
                     }
                 });
