@@ -699,13 +699,30 @@
             height: 28px;
             border-radius: 50%;
             background: var(--grafito);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            font-weight: 400;
+            color: transparent;
+            font-size: 0;
+            position: relative;
             transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), background 0.3s ease;
+        }
+
+        .faq-toggle::before,
+        .faq-toggle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: var(--white);
+            transform: translate(-50%, -50%);
+        }
+
+        .faq-toggle::before {
+            width: 10px;
+            height: 1.5px;
+        }
+
+        .faq-toggle::after {
+            width: 1.5px;
+            height: 10px;
         }
 
         .faq-item.open .faq-toggle {
@@ -772,7 +789,7 @@
         ═══════════════════════════════════════ */
         .showcase {
             background: var(--white);
-            padding: 50px 6% 80px;
+            padding: 80px 6% 80px;
             box-sizing: border-box;
         }
 
@@ -1108,6 +1125,48 @@
             background: rgba(30, 30, 30, 0);
         }
 
+        /* Cards "Próximamente" (Cesca y Módulo) — sin reveal, texto en hover */
+        .producto-card[data-product="cesca"]:hover .producto-img-wrap img,
+        .producto-card[data-product="modulo"]:hover .producto-img-wrap img {
+            filter: blur(8px) brightness(0.55);
+            transform: scale(1.08);
+        }
+
+        .producto-card[data-product="cesca"]:hover .producto-img-wrap::after,
+        .producto-card[data-product="modulo"]:hover .producto-img-wrap::after {
+            background: rgba(30, 30, 30, 0.25);
+        }
+
+        .producto-card[data-product="cesca"] .producto-img-wrap::before,
+        .producto-card[data-product="modulo"] .producto-img-wrap::before {
+            content: 'Próximamente';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.6rem;
+            letter-spacing: 0.02em;
+            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .producto-card[data-product="cesca"]:hover .producto-img-wrap::before,
+        .producto-card[data-product="modulo"]:hover .producto-img-wrap::before {
+            opacity: 1;
+        }
+
+        .producto-card[data-product="cesca"] .producto-cta,
+        .producto-card[data-product="modulo"] .producto-cta {
+            display: none;
+        }
+
         .producto-name {
             font-family: var(--font-display);
             font-weight: 500;
@@ -1173,7 +1232,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(44, 119, 218, 0.70);
+            background: rgba(44, 119, 218, 0.90);
             z-index: -1;
         }
 
@@ -1524,6 +1583,7 @@
 
             .productos { padding: 70px 6% 0; }
             .productos-header { margin-bottom: 24px; }
+            .productos-sub br.br-desktop { display: none; }
             .productos-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 8px;
@@ -1539,6 +1599,25 @@
             }
             .producto-img-wrap::after {
                 display: none;
+            }
+
+            /* Cesca y Módulo en mobile: imagen blureada + "Próximamente" siempre visible */
+            .producto-card[data-product="cesca"] .producto-img-wrap img,
+            .producto-card[data-product="modulo"] .producto-img-wrap img {
+                filter: blur(6px) brightness(0.55);
+                transform: scale(1.08);
+            }
+            .producto-card[data-product="cesca"] .producto-img-wrap::after,
+            .producto-card[data-product="modulo"] .producto-img-wrap::after {
+                display: block;
+                background: rgba(30, 30, 30, 0.25);
+            }
+            .producto-card[data-product="cesca"] .producto-img-wrap::before,
+            .producto-card[data-product="modulo"] .producto-img-wrap::before {
+                opacity: 1;
+                font-size: 0.78rem;
+                letter-spacing: 0.01em;
+                padding: 0 6px;
             }
             .producto-name {
                 font-size: 0.9rem;
@@ -1564,7 +1643,7 @@
             .faq-q { padding: 22px 0; font-size: 1.1rem; }
 
             .showcase {
-                padding: 20px 6% 70px;
+                padding: 50px 6% 70px;
                 min-height: 0;
                 display: block;
             }
@@ -1701,7 +1780,7 @@
     <section class="productos" id="productos">
         <div class="productos-header">
             <h2 class="productos-title reveal">Tienda Online, próximamente.</h2>
-            <p class="productos-sub reveal d1">Tres muebles de diseño. Como los que te gustan a vos, pero para el que realmente manda. Muy pronto disponibles en nuestra tienda online.</p>
+            <p class="productos-sub reveal d1">Tres muebles de diseño. Como los que te gustan a vos, <br class="br-desktop">pero para quien realmente manda en la casa. <br>Muy pronto disponibles en nuestra tienda online. <br>Primer lanzamiento, Cama Vetra.</p>
         </div>
 
         <div class="productos-grid">
@@ -1738,8 +1817,8 @@
     <section class="showcase" id="showcase">
         <div class="showcase-inner" id="showcaseInner">
             <div class="showcase-eyebrow" id="showcaseEyebrow">/ Modelo destacado</div>
-            <h2 class="showcase-title" id="showcaseTitle">Cama Cesca</h2>
-            <p class="showcase-tagline" id="showcaseTagline">Líneas curvas, alma cromada.</p>
+            <h2 class="showcase-title" id="showcaseTitle">Cama Vetra</h2>
+            <p class="showcase-tagline" id="showcaseTagline">Mueble RTA. Madera fenólica premium con almohadón anti-desgarro impermeable.</p>
 
             <div class="showcase-grid">
                 <div class="showcase-media">
@@ -1748,14 +1827,14 @@
                     </div>
                     <div class="showcase-hero">
                         <button class="showcase-arrow showcase-arrow-prev" id="showcasePrev" aria-label="Imagen anterior">‹</button>
-                        <img src="images/CamaCesca.jpg" alt="Cama Cesca" id="showcaseHero">
+                        <img src="images/Vetra.jpg" alt="Cama Vetra" id="showcaseHero">
                         <button class="showcase-arrow showcase-arrow-next" id="showcaseNext" aria-label="Imagen siguiente">›</button>
                     </div>
                 </div>
 
                 <div class="showcase-content">
                     <p class="showcase-description" id="showcaseDescription">
-                        La Cesca toma la elegancia del cantilever clásico y la lleva al hogar de tu mascota. Acero tubular cromado curvado a mano, terminación espejo, con almohadón removible en cordura negra.
+                        El primer producto de la marca. Inspirada en el estilo Japandi, la Cama Vetra es una pieza baja, construida con materiales nobles y resistentes. Diseñada para integrarse naturalmente al hogar, aportando calidez a los espacios y máxima comodidad para quien realmente manda en la casa.
                     </p>
 
                     <div class="showcase-specs" id="showcaseSpecs">
@@ -1790,11 +1869,10 @@
                 <h2 class="historia-title reveal d1">Diseñamos<br>para ellos.</h2>
             </div>
             <div class="historia-text reveal d2">
-                <p><strong>Estudio de diseño para mascotas.</strong></p>
+                <p><strong>Estudio de diseño de mobiliario y objetos para mascotas.</strong></p>
                 <p>Grandanés nació en Córdoba, con un grupo de amigos diseñadores.</p>
-                <p>Queríamos crear objetos como los que nos gustan a nosotros, pero para los que más amamos, nuestros perros.</p>
-                <p>Así que decidimos hacerlo nosotros.</p>
-                <p>Diseñamos cosas que nos gustan, con materiales que aguantan, para los que mandan de verdad en la casa.</p>
+                <p>Queríamos crear objetos como los que nos gustan a nosotros, pero para quienes realmente mandan en casa.</p>
+                <p>Diseñamos cosas que nos gustan con materiales que aguantan. <strong>Diseñamos para ellos.</strong></p>
             </div>
         </div>
 
@@ -1819,7 +1897,7 @@
                 <div class="faq-eyebrow reveal">/ Preguntas frecuentes</div>
                 <h2 class="faq-title reveal d1">Lo que todos quieren saber.</h2>
             </div>
-            <p class="faq-sub reveal d2">Lo más común que nos preguntan.<br>Si te queda algo en el aire, escribinos.</p>
+            <p class="faq-sub reveal d2">Si te queda algo en el aire, escribinos.</p>
         </div>
 
         <div class="faq-list reveal d1">
@@ -1829,7 +1907,7 @@
                     <span class="faq-toggle">+</span>
                 </button>
                 <div class="faq-a"><div class="faq-a-inner">
-                    Pronto. Estamos terminando de cerrar los detalles para lanzar la tienda online. Sumate al newsletter abajo y te avisamos antes que nadie.
+                    Muy pronto. Estamos terminando de cerrar los detalles para lanzar la tienda online. Sumate al newsletter abajo y te avisamos antes que nadie.
                 </div></div>
             </div>
 
@@ -1839,7 +1917,7 @@
                     <span class="faq-toggle">+</span>
                 </button>
                 <div class="faq-a"><div class="faq-a-inner">
-                    Cada cama tiene su precio según materiales y mano de obra. Vas a tener el detalle completo al lanzamiento. Quienes estén en el newsletter reciben el precio antes que nadie y con descuento de pre-lanzamiento.
+                    Cada cama tiene su precio según complejidad, materiales y mano de obra. Quienes estén en el newsletter reciben el precio antes que nadie y con descuento de pre-lanzamiento.
                 </div></div>
             </div>
 
@@ -1849,27 +1927,17 @@
                     <span class="faq-toggle">+</span>
                 </button>
                 <div class="faq-a"><div class="faq-a-inner">
-                    Sí. Despachamos desde Córdoba a toda Argentina.
+                    Sí. Despachamos desde Córdoba a toda Argentina. Ningún perro merece quedar afuera.
                 </div></div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-q" type="button">
-                    <span>¿Qué tamaños de mascota soportan?</span>
+                    <span>¿Para qué tamaño de mascota están diseñadas?</span>
                     <span class="faq-toggle">+</span>
                 </button>
                 <div class="faq-a"><div class="faq-a-inner">
-                    La primera tanda está pensada para mascotas de hasta 25 kg. Próximamente más modelos.
-                </div></div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q" type="button">
-                    <span>¿Tienen garantía?</span>
-                    <span class="faq-toggle">+</span>
-                </button>
-                <div class="faq-a"><div class="faq-a-inner">
-                    Sí. 1 año de garantía contra defectos de fabricación. Si algo no aguanta lo que tiene que aguantar, lo solucionamos.
+                    La primera tanda está pensada para razas pequeñas. Pero tranqui, próximamente habrá espacio para todos.
                 </div></div>
             </div>
 
@@ -1879,7 +1947,7 @@
                     <span class="faq-toggle">+</span>
                 </button>
                 <div class="faq-a"><div class="faq-a-inner">
-                    Cada pieza viene con su instructivo de cuidado. Trabajamos con materiales nobles y fáciles de limpiar. Pensados para aguantar el uso real.
+                    Cada cama viene con su instructivo de cuidado. Trabajamos con materiales resistentes y fáciles de limpiar. Pensadas para aguantar el uso real.
                 </div></div>
             </div>
         </div>
@@ -2161,8 +2229,8 @@
                 },
                 vetra: {
                     name: 'Cama Vetra',
-                    tagline: 'Fenólico premium con almohadón anti-desgarro.',
-                    description: 'Base de fenólico de alta calidad sobre patas con insertos roscados. Almohadón con tela técnica anti-desgarro, pensada para resistir uñas, pelo y tiempo.',
+                    tagline: 'Mueble RTA. Madera fenólica premium con almohadón anti-desgarro impermeable.',
+                    description: 'El primer producto de la marca. Inspirada en el estilo Japandi, la Cama Vetra es una pieza baja, construida con materiales nobles y resistentes. Diseñada para integrarse naturalmente al hogar, aportando calidez a los espacios y máxima comodidad para quien realmente manda en la casa.',
                     hero: 'images/Vetra.jpg',
                     thumbs: [
                         'images/Vetra.jpg',
@@ -2170,10 +2238,10 @@
                         'images/Vetra03.png'
                     ],
                     specs: [
-                        { label: 'Estructura', value: 'Fenólico premium' },
-                        { label: 'Almohadón', value: 'Tela anti-desgarro' },
-                        { label: 'Dimensiones', value: '60 × 40 × 12 cm' },
-                        { label: 'Mascotas hasta', value: '25 kg' }
+                        { label: 'Dimensiones', value: '65 × 45 × 15 cm' },
+                        { label: 'Almohadón', value: 'Espuma de alta densidad + Tela anti-desgarro impermeable' },
+                        { label: 'Estructura', value: 'Madera fenólica premium' },
+                        { label: 'Tamaño Mascotas', value: 'Pequeño' }
                     ]
                 },
                 modulo: {
@@ -2278,12 +2346,16 @@
             }
 
             // Estado inicial
-            renderThumbs(products.cesca.thumbs, 0);
-            renderSpecs(products.cesca.specs);
-            cards[0]?.classList.add('selected');
+            renderThumbs(products.vetra.thumbs, 0);
+            renderSpecs(products.vetra.specs);
+            document.querySelector('.producto-card[data-product="vetra"]')?.classList.add('selected');
 
-            // Click handlers en cards
+            // Click handlers — solo Vetra es seleccionable (Cesca y Módulo son "próximamente")
             cards.forEach(card => {
+                if (card.dataset.product !== 'vetra') {
+                    card.style.cursor = 'default';
+                    return;
+                }
                 card.style.cursor = 'pointer';
                 card.addEventListener('click', () => {
                     const key = card.dataset.product;
@@ -2327,6 +2399,12 @@
                     answer.style.maxHeight = '0';
                     item.classList.remove('open');
                 } else {
+                    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+                        if (openItem === item) return;
+                        const openAnswer = openItem.querySelector('.faq-a');
+                        if (openAnswer) openAnswer.style.maxHeight = '0';
+                        openItem.classList.remove('open');
+                    });
                     answer.style.maxHeight = answer.scrollHeight + 'px';
                     item.classList.add('open');
                 }
